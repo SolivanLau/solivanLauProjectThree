@@ -1,22 +1,25 @@
-
 import './App.css';
-import FridgeDisplay from './Components/FridgeDisplay';
+
+// COMPONENT IMPORTS
+import Fridge from './Components/Fridge';
+
 
 function App() {
-
-
   return (
-    <div className="App">
-      <header>
-        <h1>Stock my Fridge!</h1>
-      </header>
-      <FridgeDisplay />
+    <div className='App'>
+      <nav>
+        <ul className="displayTabs">
+          <li className="tab">
 
-      <footer>
+          </li>
+          <li className="tab">
 
-      </footer>
+          </li>
+        </ul>
+      </nav>
+      <Fridge />
     </div>
-  );
+  )
 }
 
 export default App;
