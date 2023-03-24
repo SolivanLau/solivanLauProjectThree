@@ -1,24 +1,21 @@
 import './App.css';
 
 // COMPONENT IMPORTS
-import Fridge from './Components/Fridge';
 
+import { Fragment } from 'react';
+import ListsInfo from './Components/ListsInfo';
 
 function App() {
   return (
-    <div className='App'>
-      <nav>
-        <ul className="displayTabs">
-          <li className="tab">
-
-          </li>
-          <li className="tab">
-
-          </li>
-        </ul>
-      </nav>
-      <Fridge />
-    </div>
+    <Fragment className='App'>
+      <header>
+        <h1>Stock My Fridge!</h1>
+      </header>
+      <ListsInfo />
+      <footer>
+        <p>Solivan Lau at JunoCollege 2023</p>
+      </footer>
+    </Fragment>
   )
 }
 

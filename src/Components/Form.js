@@ -1,5 +1,5 @@
 
-const Form = ({ handleChange, autoCompleteArr, handleSuggest, inputState, handleSubmit }) => {
+const Form = ({ handleChange, autoCompleteArr, handleSuggest, inputState, handleSubmit, searchError }) => {
 
     // console.log(props)
     // console.log()
@@ -18,6 +18,9 @@ const Form = ({ handleChange, autoCompleteArr, handleSuggest, inputState, handle
                 value={inputState}
             />
             <button>Add item to fridge</button>
+            {searchError === true ?
+                <p className="errorMsg">please submit an food item that matches a suggestion!</p> : null
+            }
 
             {/* USER TEXT INPUT: map autocomplete arr here */}
 
@@ -29,6 +32,7 @@ const Form = ({ handleChange, autoCompleteArr, handleSuggest, inputState, handle
                             onClick={handleSuggest}>
 
                             {suggestion.name}
+
                         </li>)
                 })}
             </ul>
