@@ -7,7 +7,7 @@ import ListsInfo from './Components/ListsInfo';
 
 function App() {
   return (
-    <Fragment className='App'>
+    <div className='App'>
       <header>
         <h1>Stock My Fridge!</h1>
       </header>
@@ -15,7 +15,7 @@ function App() {
       <footer>
         <p>Solivan Lau at JunoCollege 2023</p>
       </footer>
-    </Fragment>
+    </div>
   )
 }
 

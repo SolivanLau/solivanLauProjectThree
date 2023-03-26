@@ -1,15 +1,14 @@
 
-const Form = ({ handleChange, autoCompleteArr, handleSuggest, inputState, handleSubmit, searchError }) => {
+const Form = ({ handleChange, autoCompleteArr, handleSuggest, inputState, handleSubmit, searchError, currentMode }) => {
 
     // console.log(props)
-    // console.log()
 
 
     // CONTROL TEXT INPUT: USER SEARCH
     return (
         <form onSubmit={handleSubmit}>
             {/* USER TEXT INPUT */}
-            <label htmlFor="fridgeStock">Update your fridge</label>
+            <label htmlFor="fridgeStock">Update your {currentMode.title.toLowerCase()}</label>
             <input
                 type="text"
                 name="fridgeStock"
@@ -17,7 +16,7 @@ const Form = ({ handleChange, autoCompleteArr, handleSuggest, inputState, handle
                 onChange={handleChange}
                 value={inputState}
             />
-            <button>Add item to fridge</button>
+            <button>Add to {currentMode.title.toLowerCase()}</button>
             {searchError === true ?
                 <p className="errorMsg">please submit an food item that matches a suggestion!</p> : null
             }
@@ -25,6 +24,7 @@ const Form = ({ handleChange, autoCompleteArr, handleSuggest, inputState, handle
             {/* USER TEXT INPUT: map autocomplete arr here */}
 
             <ul>
+
                 {autoCompleteArr < 1 ? null : autoCompleteArr.map((suggestion) => {
                     return (
                         <li

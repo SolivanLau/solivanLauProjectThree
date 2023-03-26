@@ -1,18 +1,16 @@
 import FoodItem from "./FoodItem";
 
-const Gallery = ({ fridgeArr }) => {
+const Gallery = ({ currentArr, currentMode }) => {
 
     return (
         <>
             <h2>Gallery</h2>
             <ul>
-                {fridgeArr.length <= 0 ? null : fridgeArr.map((foodItemObj) => {
+                {currentArr.length <= 0 ? null : currentArr.map((foodItemObj) => {
                     return (
                         <li key={foodItemObj.id}>
-                            <FoodItem name={foodItemObj.foodName} fbId={foodItemObj.id} imgFile={foodItemObj.imgLink} altText={foodItemObj.altText} />
+                            <FoodItem name={foodItemObj.foodName} fbId={foodItemObj.id} imgFile={foodItemObj.imgLink} altText={foodItemObj.altText} currentMode={currentMode} />
                         </li>)
-
-
                 })}
             </ul>
         </>
