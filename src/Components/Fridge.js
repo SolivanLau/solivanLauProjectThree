@@ -17,15 +17,14 @@ const dbGroceryRef = ref(database, `groceryList/`)
 
 
 const Fridge = ({ userSearch, searchError, autoCompleteArr, pushFoodtoDB, handleChange, handleSuggest }) => {
+
+
     const fridgeMode = {
-        title: 'fridge'
-
+        title: 'fridge',
+        styleClass: 'fridge'
     }
-
-
     // FRIDGE LIST STATE: contains all items from Firebase db to be rendered
     const [fridgeArr, setFridgeArr] = useState([])
-
 
 
     // SUBMITING FORM: if EVERY item in the autocomplete list does NOT match update error state, OTHERWISE, take the data and push  to firebase + reset input  val
@@ -51,7 +50,8 @@ const Fridge = ({ userSearch, searchError, autoCompleteArr, pushFoodtoDB, handle
                     id: item,
                     foodName: remotefridgeData[item].name,
                     imgLink: remotefridgeData[item].imageUrl,
-                    altText: remotefridgeData[item].altText
+                    altText: remotefridgeData[item].altText,
+                    expDate: remotefridgeData[item].expDate
                 }
 
                 localFridgeArr.push(foodStatObj)
@@ -66,7 +66,7 @@ const Fridge = ({ userSearch, searchError, autoCompleteArr, pushFoodtoDB, handle
 
 
     return (
-        <div>
+        <section className="listDisplay fridge">
             <h2>Fridge Display</h2>
 
             <Form
@@ -83,7 +83,7 @@ const Fridge = ({ userSearch, searchError, autoCompleteArr, pushFoodtoDB, handle
                 currentArr={fridgeArr}
                 currentMode={fridgeMode}
             />
-        </div>
+        </section>
     )
 }
 

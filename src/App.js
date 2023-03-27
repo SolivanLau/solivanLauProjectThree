@@ -1,19 +1,22 @@
-import './App.css';
+import './App.scss';
 
 // COMPONENT IMPORTS
 
-import { Fragment } from 'react';
 import ListsInfo from './Components/ListsInfo';
 
 function App() {
   return (
     <div className='App'>
       <header>
-        <h1>Stock My Fridge!</h1>
+        <div className="wrapper">
+          <h1>Stock My Fridge!</h1>
+        </div>
       </header>
       <ListsInfo />
       <footer>
-        <p>Solivan Lau at JunoCollege 2023</p>
+        <div className="wrapper">
+          <p>Made by Solivan Lau at JunoCollege 2023</p>
+        </div>
       </footer>
     </div>
   )

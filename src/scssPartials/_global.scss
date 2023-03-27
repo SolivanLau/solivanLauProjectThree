@@ -1,0 +1,43 @@
+html {
+    font-size: 125%;
+    scroll-behavior: smooth;
+}
+
+
+
+// strip styles
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+a {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+// wrapper
+.wrapper {
+    max-width: 1440px;
+    width: 85%;
+    margin: 0 auto;
+}
+
+
+header,
+footer {
+    text-align: center;
+}

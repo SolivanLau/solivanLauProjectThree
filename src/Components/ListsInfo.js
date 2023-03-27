@@ -40,7 +40,8 @@ const ListsInfo = () => {
                 const foodItemObj = {
                     name: suggestion.name,
                     imageUrl: suggestion.image,
-                    altText: `Image of a ${suggestion.name}`
+                    altText: `Image of a ${suggestion.name}`,
+                    expDate: ''
                 }
 
                 // push object to firebase
@@ -84,42 +85,47 @@ const ListsInfo = () => {
     return (
         // nav
         <>
-            <nav>
-                <ul className='displayTabs'>
-                    <li className='tab'>
-                        <Link to='/'>Fridge</Link>
-                    </li>
-                    <li className='tab'>
-                        <Link to='/grocery'>Grocery</Link>
-                    </li>
-                </ul>
-            </nav>
-            <Routes>
-                <Route
-                    path='/'
+            <main>
+                <div className="wrapper">
 
-                    element={
-                        <Fridge
-                            userSearch={userSearch}
-                            searchError={searchError}
-                            autoCompleteArr={autoCompleteArr}
-                            pushFoodtoDB={pushFoodtoDB}
-                            handleChange={handleChange}
-                            handleSuggest={handleSuggest}
-                        />} />
-                <Route
-                    path='/grocery'
-                    element={
-                        <Grocery
-                            userSearch={userSearch}
-                            searchError={searchError}
-                            autoCompleteArr={autoCompleteArr}
-                            pushFoodtoDB={pushFoodtoDB}
-                            handleChange={handleChange}
-                            handleSuggest={handleSuggest}
+                    <nav>
+                        <ul className='displayTabs'>
+                            <li className='tabItem'>
+                                <Link to='/'>Fridge</Link>
+                            </li>
+                            <li className='tabItem'>
+                                <Link to='/grocery'>Grocery</Link>
+                            </li>
+                        </ul>
+                    </nav>
+                    <Routes>
+                        <Route
+                            path='/'
 
-                        />} />
-            </Routes>
+                            element={
+                                <Fridge
+                                    userSearch={userSearch}
+                                    searchError={searchError}
+                                    autoCompleteArr={autoCompleteArr}
+                                    pushFoodtoDB={pushFoodtoDB}
+                                    handleChange={handleChange}
+                                    handleSuggest={handleSuggest}
+                                />} />
+                        <Route
+                            path='/grocery'
+                            element={
+                                <Grocery
+                                    userSearch={userSearch}
+                                    searchError={searchError}
+                                    autoCompleteArr={autoCompleteArr}
+                                    pushFoodtoDB={pushFoodtoDB}
+                                    handleChange={handleChange}
+                                    handleSuggest={handleSuggest}
+
+                                />} />
+                    </Routes>
+                </div>
+            </main>
         </>
 
     )

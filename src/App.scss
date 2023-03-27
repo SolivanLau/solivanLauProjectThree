@@ -1,0 +1,7 @@
+// setup and streamline
+@use './scssPartials/setup';
+@use './scssPartials/variables';
+@use './scssPartials/global';
+
+// app specific sections
+@use './scssPartials/header';

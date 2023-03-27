@@ -1,16 +1,19 @@
 // firebase integration
 import firebaseDB from './Firebase';
-import { getDatabase, ref, remove } from 'firebase/database';
+import { getDatabase, ref, remove, push, update } from 'firebase/database';
 import { useEffect, useState } from 'react';
+
+import ExpForm from './ExpForm';
 
 // database details and reference
 const database = getDatabase(firebaseDB)
 
-const FoodItem = ({ name, fbId, imgFile, altText, currentMode }) => {
+const FoodItem = ({ name, fbId, imgFile, altText, expDate, currentMode }) => {
     // STATES
-    const [expDate, setExpDate] = useState('');
+    // user set expiry date
+    const [exp, setExp] = useState('');
+    // calc DIFFERENCE  of user set exp date vs. today's date
     const [daysToExpire, setDaysToExpire] = useState('');
-    const [dateToday, setDateToday] = useState('')
 
 
 
@@ -20,49 +23,52 @@ const FoodItem = ({ name, fbId, imgFile, altText, currentMode }) => {
         remove(foodItemRef)
     }
 
-    // control exp input
+    // control expiry input: ONCHAGE, take user selected date and send to firebase
     const handleExp = (event) => {
-        const date = event.target.value;
-        setExpDate(date)
-
+        // user selected date
+        const date = { expDate: event.target.value };
+        // ref to specific firebase item
+        const foodItemExpRef = ref(database, `fridgeList/${fbId}`)
+        // take user input and update on firebase 
+        update(foodItemExpRef, date)
     }
 
-    const todayFull = new Date();
-    const todayDate = todayFull.getDate();
-    const todayMonth = todayFull.getMonth() + 1;
-    const todayYear = todayFull.getFullYear();
-
-
-
-
+    // ANY TIME USER CHANGES DATE INPUT VAL: calc difference and display to page
     useEffect(() => {
         if (expDate !== '') {
-            const dateArr = expDate.split('-');
+            const today = new Date()
+            const userDate = new Date(expDate)
+            // subtract today from exp date, returning it in milisec absolute val (always positive)
+            const diffTime = Math.abs(userDate - today)
+            // miliseconds divided by calc for milisec in a day
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
 
-            console.log(dateArr.map(Number))
-
-
-
+            setDaysToExpire(diffDays)
         }
+
     }, [expDate])
+
+
+
     return (
-        <div className='foodItem'>
+        <div className='foodItemContainer'>
             <h3>{name}</h3>
             <div className="foodImgContainer">
                 <img src={`https://spoonacular.com/cdn/ingredients_100x100/${imgFile}`} alt={altText} />
             </div>
             {currentMode.title !== 'fridge' ? null :
-                <form action="" className="expForm">
-                    <label htmlFor="expDate">Expires in: </label>
-                    <input
-                        type="date"
-                        name="expDate"
-                        id="expDate"
-                        onChange={handleExp}
-                        value={expDate}
+                <>
+                    <ExpForm
+                        handleExp={handleExp}
+                        expDate={expDate}
                     />
-                </form>
+
+                    <div className="expCalContainer">
+                        <p>{daysToExpire} {daysToExpire === '' ? null : (daysToExpire > 1 ? 'days left' : 'day left')}</p>
+                    </div>
+                </>
             }
+
 
             <button onClick={handleRemove}>
                 <span>delete current food item</span>
