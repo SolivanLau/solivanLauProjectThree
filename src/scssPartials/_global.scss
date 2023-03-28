@@ -77,7 +77,12 @@ button {
 }
 
 //error msg popup!
-.errorMsg {}
+.errorMsg {
+    position: absolute;
+    background-color: $white;
+    padding: 10px;
+    color: $black;
+}
 
 // wrapper
 

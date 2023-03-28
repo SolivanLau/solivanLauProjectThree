@@ -1,6 +1,6 @@
 // firebase integration
 import firebaseDB from './Firebase';
-import { getDatabase, ref, remove, push, update } from 'firebase/database';
+import { getDatabase, ref, remove, update } from 'firebase/database';
 import { useEffect, useState } from 'react';
 
 import ExpForm from './ExpForm';
@@ -11,10 +11,14 @@ const database = getDatabase(firebaseDB)
 const FoodItem = ({ name, fbId, imgFile, altText, expDate, currentMode }) => {
     // STATES
 
-    // DIFFERENCE  of user set exp date vs. today's date
+    // DIFFERENCE of user selected exp date vs. today's date
     const [daysToExpire, setDaysToExpire] = useState('');
 
+    // ERROR: true when day's to expire is a negative value
     const [expError, setExpError] = useState(false)
+
+
+    // FUNCTIONS
 
     //REMOVE BUTTON: removes item from firebase via id, onvalue updateslocal array, gallery contents rerender
     const handleRemove = () => {
@@ -34,9 +38,8 @@ const FoodItem = ({ name, fbId, imgFile, altText, expDate, currentMode }) => {
 
     // ANY TIME USER CHANGES DATE INPUT VAL: calc difference and display to page
     useEffect(() => {
+        // if user's set exp date is NOT an empty string, calc difference of today's date and user date
         if (expDate) {
-
-
             const today = new Date()
             const userDate = new Date(expDate)
             // subtract today from exp date, returning it in milisec absolute val (always positive)
@@ -46,10 +49,12 @@ const FoodItem = ({ name, fbId, imgFile, altText, expDate, currentMode }) => {
 
             setDaysToExpire(diffDays)
 
+            // if the difference is a negative val, create error msg
             if (diffDays < 0) {
                 setExpError(true)
+            } else {
+                setExpError(false)
             }
-
         }
 
     }, [expDate])
@@ -57,44 +62,66 @@ const FoodItem = ({ name, fbId, imgFile, altText, expDate, currentMode }) => {
 
 
     return (
+        // FOOD ITEM: parent is li w className= FOOD ITEM
         <>
+            {/* FOOD ITEM'S NAME */}
             <h3>{name}</h3>
+
+
+            {/* FOOD ITEM'S IMG */}
 
             <div className="foodImgContainer">
                 <img src={`https://spoonacular.com/cdn/ingredients_100x100/${imgFile}`} alt={altText} />
             </div>
+
+            {/* FOOD ITEM'S EXPIRY FORM and DISPLAY (SPECIFIC TO FRIDGE GALLERY ONLY)*/}
+
             {currentMode.title !== 'fridge' ? null :
                 <>
+                    {/* EXPIRY FORM */}
                     <ExpForm
                         handleExp={handleExp}
                         expDate={expDate}
                     />
+                    {/* EXPIRY DISPLAY (clac difference of user set date and ) */}
 
-                    <div className="expCalcContainer">
-                        <p>
-                            {/* displaying daysToExpire NUMBER */}
+                    <div className="expDisplay">
 
-                            {daysToExpire === false || daysToExpire <= 0 ? null : daysToExpire}
+                        {/* displaying daysToExpire NUMBER if number is greater than 0 */}
+
+                        {daysToExpire === false || daysToExpire <= 0 ? null :
+                            <p>
+                                {daysToExpire}
+
+                                {/* displaying PLURAL/SINGULAR 'day' */}
+
+                                {daysToExpire === '' || daysToExpire <= 0 ? null : (daysToExpire > 1 ? 'days left' : ' day left')}
+                            </p>
+                        }
 
 
-                            {/* displaying PLURAL/SINGULAR 'day' */}
 
-                            {daysToExpire === '' || daysToExpire <= 0 ? null : (daysToExpire > 1 ? ' days left' : ' day left')}
 
-                        </p>
+
+                        {/* ERROR MSG IF user enters date before today's date */}
+
+                        {expError === true ?
+
+                            <p className='errorMsg'>
+                                Please enter a date <span className="attention">after</span> today's date... otherwise you may have some stinky {name}
+                            </p> : null}
+
                     </div>
-                    {expError === false ? <p className='errorMsg'>Please enter a date <span className="attention">after</span> today's date... otherwise you may have some stinky {name}</p> : null}
                 </>
             }
 
-
+            {/* REMOVE FOOD ITEM BUTTON */}
             <button className="symbolBtn removeBtn" onClick={handleRemove}>
                 <span className='sr-only'>Delete {name} from {currentMode.title}</span>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 96 960 960" >
                     <path d="M480 618 270 828q-9 9-21 9t-21-9q-9-9-9-21t9-21l210-210-210-210q-9-9-9-21t9-21q9-9 21-9t21 9l210 210 210-210q9-9 21-9t21 9q9 9 9 21t-9 21L522 576l210 210q9 9 9 21t-9 21q-9 9-21 9t-21-9L480 618Z" />
                 </svg>
             </button>
-
         </>
     )
 }

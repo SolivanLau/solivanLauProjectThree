@@ -1,3 +1,5 @@
+@use './variables' as *;
+
 // Food  Item
 
 .foodItem {
@@ -5,10 +7,16 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
-    background-color: rgb(208, 208, 255);
+    background-color: $blue;
+    border-radius: 10px;
+    padding: 10px;
 }
 
 .expired {
     background-color: rgb(141, 218, 141);
+}
+
+.expDisplay {
+    // for error msg
+    position: relative;
 }

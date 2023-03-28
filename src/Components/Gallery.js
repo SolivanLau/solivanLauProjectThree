@@ -4,7 +4,7 @@ const Gallery = ({ currentArr, currentMode }) => {
     return (
         <article className={`gallery ${currentMode.styleClass}`}>
             <h2>Gallery</h2>
-            <ul className="">
+            <ul className="foodList">
                 {currentArr.length <= 0 ? null : currentArr.map((foodItemObj) => {
                     return (
                         <li key={foodItemObj.id} className="foodItem">

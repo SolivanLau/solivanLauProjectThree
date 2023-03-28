@@ -20,26 +20,28 @@ const ListsInfo = () => {
     const [autoCompleteArr, setAutocompleteArr] = useState([])
 
 
-    // objective: match between autocomplete array and submitted answer. if match, copy its contents into foodItem obj, and send it to firebase
+
     const pushFoodtoDB = (reference) => {
-        autoCompleteArr.every((suggestion) => {
-            if (suggestion.name !== userSearch) {
-                setSearchError(true)
-            } else {
-                setSearchError(false)
 
-                const foodItemObj = {
-                    name: suggestion.name,
-                    imageUrl: suggestion.image,
-                    altText: `Image of a ${suggestion.name}`,
-                    expDate: ''
-                }
+        // // IF EVERY suggestion does not match user's inputted item, create an error message
+        // autoCompleteArr.every((suggestion) => {
+        //     if (suggestion.name !== userSearch) {
+        //         setSearchError(true)
+        //     } else {
+        //         setSearchError(false)
 
-                // push object to firebase
-                push(reference, foodItemObj)
-                setUserSearch('')
-            }
-        })
+        //         const foodItemObj = {
+        //             name: suggestion.name,
+        //             imageUrl: suggestion.image,
+        //             altText: `Image of a ${suggestion.name}`,
+        //             expDate: ''
+        //         }
+
+        //         // push object to firebase
+        //         push(reference, foodItemObj)
+        //         setUserSearch('')
+        //     }
+        // })
     }
 
     // handle and control user text input

@@ -1,6 +1,6 @@
 // firebase integration
 import firebaseDB from './Firebase';
-import { getDatabase, ref, onValue, push } from 'firebase/database';
+import { getDatabase, ref, onValue } from 'firebase/database';
 // hooks
 import { useState, useEffect } from "react";
 
@@ -12,7 +12,6 @@ import Gallery from './Gallery';
 // database details and reference
 const database = getDatabase(firebaseDB)
 const dbFridgeRef = ref(database, `fridgeList/`)
-const dbGroceryRef = ref(database, `groceryList/`)
 
 
 
