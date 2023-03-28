@@ -1,9 +1,15 @@
+@use './variables' as *;
+
+// setting fontsize 125%
 html {
     font-size: 125%;
     scroll-behavior: smooth;
+    color: $white;
 }
 
-
+body {
+    background-color: $black;
+}
 
 // strip styles
 
@@ -20,7 +26,7 @@ a {
 
 a {
     text-decoration: none;
-    color: black;
+    color: $white;
 }
 
 ul {
@@ -29,15 +35,77 @@ ul {
     padding: 0;
 }
 
+button {
+    margin: 0;
+    padding: 0;
+
+    &:hover,
+    &:focus {
+        cursor: pointer;
+    }
+
+    svg {
+        fill: $black;
+    }
+}
+
+.symbolBtn {
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 10px;
+
+    transition: 0.3s ease;
+
+    &:hover,
+    &:focus {
+        scale: 1.1;
+    }
+}
+
+.addBtn {
+    background-color: $green;
+
+    &:hover,
+    &:focus {
+        background-color: $hoverGreen;
+    }
+}
+
+.removeBtn {
+    background-color: $red;
+}
+
+//error msg popup!
+.errorMsg {}
+
 // wrapper
+
 .wrapper {
     max-width: 1440px;
     width: 85%;
     margin: 0 auto;
 }
 
+// hide content class
+.hidden {
+    display: none;
+}
+
+.appContainer {
+    height: 100vh;
+}
 
 header,
 footer {
     text-align: center;
+}
+
+// align all items to center
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }

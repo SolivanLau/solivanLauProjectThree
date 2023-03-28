@@ -10,12 +10,11 @@ const database = getDatabase(firebaseDB)
 
 const FoodItem = ({ name, fbId, imgFile, altText, expDate, currentMode }) => {
     // STATES
-    // user set expiry date
-    const [exp, setExp] = useState('');
-    // calc DIFFERENCE  of user set exp date vs. today's date
+
+    // DIFFERENCE  of user set exp date vs. today's date
     const [daysToExpire, setDaysToExpire] = useState('');
 
-
+    const [expError, setExpError] = useState(false)
 
     //REMOVE BUTTON: removes item from firebase via id, onvalue updateslocal array, gallery contents rerender
     const handleRemove = () => {
@@ -35,15 +34,22 @@ const FoodItem = ({ name, fbId, imgFile, altText, expDate, currentMode }) => {
 
     // ANY TIME USER CHANGES DATE INPUT VAL: calc difference and display to page
     useEffect(() => {
-        if (expDate !== '') {
+        if (expDate) {
+
+
             const today = new Date()
             const userDate = new Date(expDate)
             // subtract today from exp date, returning it in milisec absolute val (always positive)
-            const diffTime = Math.abs(userDate - today)
+            const diffTime = (userDate - today)
             // miliseconds divided by calc for milisec in a day
             const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
 
             setDaysToExpire(diffDays)
+
+            if (diffDays < 0) {
+                setExpError(true)
+            }
+
         }
 
     }, [expDate])
@@ -51,8 +57,9 @@ const FoodItem = ({ name, fbId, imgFile, altText, expDate, currentMode }) => {
 
 
     return (
-        <div className='foodItemContainer'>
+        <>
             <h3>{name}</h3>
+
             <div className="foodImgContainer">
                 <img src={`https://spoonacular.com/cdn/ingredients_100x100/${imgFile}`} alt={altText} />
             </div>
@@ -63,17 +70,32 @@ const FoodItem = ({ name, fbId, imgFile, altText, expDate, currentMode }) => {
                         expDate={expDate}
                     />
 
-                    <div className="expCalContainer">
-                        <p>{daysToExpire} {daysToExpire === '' ? null : (daysToExpire > 1 ? 'days left' : 'day left')}</p>
+                    <div className="expCalcContainer">
+                        <p>
+                            {/* displaying daysToExpire NUMBER */}
+
+                            {daysToExpire === false || daysToExpire <= 0 ? null : daysToExpire}
+
+
+                            {/* displaying PLURAL/SINGULAR 'day' */}
+
+                            {daysToExpire === '' || daysToExpire <= 0 ? null : (daysToExpire > 1 ? ' days left' : ' day left')}
+
+                        </p>
                     </div>
+                    {expError === false ? <p className='errorMsg'>Please enter a date <span className="attention">after</span> today's date... otherwise you may have some stinky {name}</p> : null}
                 </>
             }
 
 
-            <button onClick={handleRemove}>
-                <span>delete current food item</span>
+            <button className="symbolBtn removeBtn" onClick={handleRemove}>
+                <span className='sr-only'>Delete {name} from {currentMode.title}</span>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 96 960 960" >
+                    <path d="M480 618 270 828q-9 9-21 9t-21-9q-9-9-9-21t9-21l210-210-210-210q-9-9-9-21t9-21q9-9 21-9t21 9l210 210 210-210q9-9 21-9t21 9q9 9 9 21t-9 21L522 576l210 210q9 9 9 21t-9 21q-9 9-21 9t-21-9L480 618Z" />
+                </svg>
             </button>
-        </div>
+
+        </>
     )
 }
 

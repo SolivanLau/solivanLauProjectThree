@@ -1,8 +1,17 @@
+header {
+    margin-bottom: 20px;
+}
+
+
 // nav section
 .displayTabs {
     display: flex;
     justify-content: center;
-    gap: 20px;
 }
 
-.tabItem {}
+.tabItem {
+    display: block;
+    background-color: rgb(173, 173, 247);
+    border-radius: 10px;
+    padding: 5px 15px;
+}

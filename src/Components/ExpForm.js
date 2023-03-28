@@ -4,7 +4,7 @@ const ExpForm = ({ handleExp, expDate }) => {
 
     return (
         <form action="" className="expForm">
-            <label htmlFor="expDate">Eat Before: </label>
+            <label htmlFor="expDate">Finish by: </label>
             <input
                 type="date"
                 name="expDate"

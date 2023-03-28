@@ -224,6 +224,11 @@ html {
 html {
   font-size: 125%;
   scroll-behavior: smooth;
+  color: #F8F8F8;
+}
+
+body {
+  background-color: #191919;
 }
 
 h1,
@@ -239,7 +244,7 @@ a {
 
 a {
   text-decoration: none;
-  color: black;
+  color: #F8F8F8;
 }
 
 ul {
@@ -248,10 +253,51 @@ ul {
   padding: 0;
 }
 
+button {
+  margin: 0;
+  padding: 0;
+}
+button:hover, button:focus {
+  cursor: pointer;
+}
+button svg {
+  fill: #191919;
+}
+
+.symbolBtn {
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 10px;
+  transition: 0.3s ease;
+}
+.symbolBtn:hover, .symbolBtn:focus {
+  scale: 1.1;
+}
+
+.addBtn {
+  background-color: #C5F48B;
+}
+.addBtn:hover, .addBtn:focus {
+  background-color: #a2c971;
+}
+
+.removeBtn {
+  background-color: #F4705E;
+}
+
 .wrapper {
   max-width: 1440px;
   width: 85%;
   margin: 0 auto;
+}
+
+.hidden {
+  display: none;
+}
+
+.appContainer {
+  height: 100vh;
 }
 
 header,
@@ -259,8 +305,76 @@ footer {
   text-align: center;
 }
 
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+header {
+  margin-bottom: 20px;
+}
+
 .displayTabs {
   display: flex;
   justify-content: center;
-  gap: 20px;
+}
+
+.tabItem {
+  display: block;
+  background-color: rgb(173, 173, 247);
+  border-radius: 10px;
+  padding: 5px 15px;
+}
+
+.listDisplay {
+  max-width: 700px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.listForm {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.autoCompleteContainer {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.suggestionList {
+  position: absolute;
+  overflow-y: scroll;
+  top: 40px;
+  width: 100%;
+  background-color: white;
+  color: #191919;
+}
+
+.suggestion {
+  padding: 5px 0 0 10px;
+}
+.suggestion:hover, .suggestion:focus {
+  cursor: pointer;
+  background-color: darkgrey;
+}
+
+.foodItem {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(208, 208, 255);
+}
+
+.expired {
+  background-color: rgb(141, 218, 141);
 }/*# sourceMappingURL=App.css.map */

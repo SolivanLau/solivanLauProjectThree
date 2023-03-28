@@ -1,0 +1,14 @@
+// Food  Item
+
+.foodItem {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    background-color: rgb(208, 208, 255);
+}
+
+.expired {
+    background-color: rgb(141, 218, 141);
+}

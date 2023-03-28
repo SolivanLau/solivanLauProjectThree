@@ -6,7 +6,7 @@ import ListsInfo from './Components/ListsInfo';
 
 function App() {
   return (
-    <div className='App'>
+    <div className="appContainer">
       <header>
         <div className="wrapper">
           <h1>Stock My Fridge!</h1>
@@ -19,6 +19,8 @@ function App() {
         </div>
       </footer>
     </div>
+
+
   )
 }
 

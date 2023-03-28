@@ -1,22 +1,13 @@
 // FIREBASE INTEGRATION
-import firebaseDB from './Firebase';
-import { getDatabase, ref, onValue, push } from 'firebase/database';
+import { push } from 'firebase/database';
 // HOOKS
-import { useState, useEffect } from "react";
 import axios from 'axios';
 import { Link, Routes, Route } from 'react-router-dom';
+import { useState, useEffect } from "react";
 
 // COMPONENTS
 import Fridge from './Fridge';
 import Grocery from './Grocery';
-
-const secondaryApiKey = 'b2b9ba71b80745c19b07bc43b138f85e'
-
-// database details and reference
-const database = getDatabase(firebaseDB)
-const dbRef = ref(database)
-const dbFridgeRef = ref(database, `fridgeList/`)
-const dbGroceryRef = ref(database, `groceryList/`)
 
 const ListsInfo = () => {
     // SEARCH INPUT STATES
@@ -62,14 +53,13 @@ const ListsInfo = () => {
         setUserSearch(event.target.textContent)
     }
 
-    const secondaryApiKey = 'b2b9ba71b80745c19b07bc43b138f85e'
 
     // AUTOCOMPLETE API CALL: when text input change === api call made
     useEffect(() => {
         axios({
             url: 'https://api.spoonacular.com/food/ingredients/autocomplete',
             params: {
-                apiKey: secondaryApiKey,
+                apiKey: process.env.REACT_APP_API_KEY_ONE,
                 query: userSearch,
                 number: 10,
                 metaInformation: true
@@ -86,45 +76,47 @@ const ListsInfo = () => {
         // nav
         <>
             <main>
-                <div className="wrapper">
-
-                    <nav>
+                <nav>
+                    <div className="wrapper">
                         <ul className='displayTabs'>
-                            <li className='tabItem'>
-                                <Link to='/'>Fridge</Link>
+                            <li >
+                                <Link
+                                    to='/' className='tabItem'>Fridge</Link>
                             </li>
-                            <li className='tabItem'>
-                                <Link to='/grocery'>Grocery</Link>
+                            <li>
+                                <Link
+                                    to='/grocery'
+                                    className='tabItem'>Grocery</Link>
                             </li>
                         </ul>
-                    </nav>
-                    <Routes>
-                        <Route
-                            path='/'
+                    </div>
+                </nav>
+                <Routes>
+                    <Route
+                        path='/'
 
-                            element={
-                                <Fridge
-                                    userSearch={userSearch}
-                                    searchError={searchError}
-                                    autoCompleteArr={autoCompleteArr}
-                                    pushFoodtoDB={pushFoodtoDB}
-                                    handleChange={handleChange}
-                                    handleSuggest={handleSuggest}
-                                />} />
-                        <Route
-                            path='/grocery'
-                            element={
-                                <Grocery
-                                    userSearch={userSearch}
-                                    searchError={searchError}
-                                    autoCompleteArr={autoCompleteArr}
-                                    pushFoodtoDB={pushFoodtoDB}
-                                    handleChange={handleChange}
-                                    handleSuggest={handleSuggest}
+                        element={
+                            <Fridge
+                                userSearch={userSearch}
+                                searchError={searchError}
+                                autoCompleteArr={autoCompleteArr}
+                                pushFoodtoDB={pushFoodtoDB}
+                                handleChange={handleChange}
+                                handleSuggest={handleSuggest}
+                            />} />
+                    <Route
+                        path='/grocery'
+                        element={
+                            <Grocery
+                                userSearch={userSearch}
+                                searchError={searchError}
+                                autoCompleteArr={autoCompleteArr}
+                                pushFoodtoDB={pushFoodtoDB}
+                                handleChange={handleChange}
+                                handleSuggest={handleSuggest}
 
-                                />} />
-                    </Routes>
-                </div>
+                            />} />
+                </Routes>
             </main>
         </>
 
