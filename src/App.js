@@ -12,7 +12,9 @@ function App() {
           <h1>Stock My Fridge!</h1>
         </div>
       </header>
+
       <ListsInfo />
+
       <footer>
         <div className="wrapper">
           <p>Made by Solivan Lau at JunoCollege 2023</p>

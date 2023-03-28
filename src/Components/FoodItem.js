@@ -22,7 +22,7 @@ const FoodItem = ({ name, fbId, imgFile, altText, expDate, currentMode }) => {
 
     //REMOVE BUTTON: removes item from firebase via id, onvalue updateslocal array, gallery contents rerender
     const handleRemove = () => {
-        const foodItemRef = ref(database, `fridgeList/${fbId}`)
+        const foodItemRef = ref(database, `${currentMode.firebasePath}/${fbId}`)
         remove(foodItemRef)
     }
 
@@ -62,7 +62,7 @@ const FoodItem = ({ name, fbId, imgFile, altText, expDate, currentMode }) => {
 
 
     return (
-        // FOOD ITEM: parent is li w className= FOOD ITEM
+        // FOOD ITEM: parent is li w className= FOODITEM
         <>
             {/* FOOD ITEM'S NAME */}
             <h3>{name}</h3>
@@ -95,7 +95,7 @@ const FoodItem = ({ name, fbId, imgFile, altText, expDate, currentMode }) => {
 
                                 {/* displaying PLURAL/SINGULAR 'day' */}
 
-                                {daysToExpire === '' || daysToExpire <= 0 ? null : (daysToExpire > 1 ? 'days left' : ' day left')}
+                                {daysToExpire === '' || daysToExpire <= 0 ? null : (daysToExpire > 1 ? ' days left' : ' day left')}
                             </p>
                         }
 

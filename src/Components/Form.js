@@ -5,8 +5,6 @@ const Form = ({ handleChange, autoCompleteArr, handleSuggest, inputState, handle
 
     const [inputActive, setInputActive] = useState(false)
 
-
-
     // useRef gives direct access to DOM node via ref prop -> INPUT
     const inputRef = useRef(null)
 
@@ -29,10 +27,10 @@ const Form = ({ handleChange, autoCompleteArr, handleSuggest, inputState, handle
 
 
     return (
-        <form onSubmit={handleSubmit} className="listForm" autoComplete="off">
+        <form onSubmit={handleSubmit} className={`listForm ${currentMode.title}`} autoComplete="off">
 
 
-            <label htmlFor="fridgeStock">Update your {currentMode.title.toLowerCase()}</label>
+            <label htmlFor="fridgeStock">Update {currentMode.title.toLowerCase()}</label>
 
             <div className="autoCompleteContainer">
 
@@ -41,10 +39,12 @@ const Form = ({ handleChange, autoCompleteArr, handleSuggest, inputState, handle
                     type="text"
                     name="fridgeStock"
                     id="fridgeStock"
-                    placeholder={`Add food to your ${currentMode.title.toLowerCase()}`}
+                    placeholder={`Add food to your ${currentMode.title}`}
+                    className={` ${currentMode.title}input`}
                     onChange={handleChange}
                     value={inputState}
                     ref={inputRef}
+
                 />
 
                 {/* autoComplete arr maps here */}

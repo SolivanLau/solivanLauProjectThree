@@ -19,17 +19,22 @@ const ListsInfo = () => {
     // AUTO COMPLETE STATE
     const [autoCompleteArr, setAutocompleteArr] = useState([])
 
+    // TAB ACTIVE CLASS STATE
+    const [tabActive, setTabActive] = useState('fridge')
+
+
+    // return true/false if current suggestion's name DOES NOT match user input
     const searchEval = (suggestion) => {
-        // return true/false if current suggestion's name matches user input
-        return suggestion.name === userSearch;
+        return suggestion.name !== userSearch;
     }
 
+    // evaluates whether user input matches any suggestion, then pushes to db
     const pushFoodtoDB = (reference) => {
-        console.log(autoCompleteArr);
-        const userSearchCheck = autoCompleteArr.every(searchEval)
+        // if no suggestions match user input, return true 
+        const matchSuggestionFailed = autoCompleteArr.every(searchEval)
 
         // IF ALL suggestions does not match user's inputted item, create an error message
-        if (userSearchCheck === false) {
+        if (matchSuggestionFailed === true) {
             setSearchError(true)
         } else {
             // OTHERWISE remove error msg
@@ -65,14 +70,14 @@ const ListsInfo = () => {
     }
 
 
-    // AUTOCOMPLETE API CALL: when text input change === api call made
+    // AUTOCOMPLETE API CALL: provides list based on text input change
     useEffect(() => {
         axios({
             url: 'https://api.spoonacular.com/food/ingredients/autocomplete',
             params: {
                 apiKey: process.env.REACT_APP_API_KEY_ONE,
                 query: userSearch,
-                number: 10,
+                number: 20,
                 metaInformation: true
             }
         }).then((apiData) => {
@@ -82,27 +87,40 @@ const ListsInfo = () => {
         })
     }, [userSearch])
 
+    // TAB ACTIVE HANDLER: setsState to tab title (string), if that state is = to string, give class of active
 
+    const handleTabActive = (event) => {
+        setTabActive(event.target.textContent.trim().toLowerCase())
+    }
+    console.log(tabActive)
     return (
-        // nav
         <>
+            {/* MAIN CONTENT */}
             <main>
+                {/* NAV */}
                 <nav>
-                    <div className="wrapper">
-                        <ul className='displayTabs'>
-                            <li >
-                                <Link
-                                    to='/' className='tabItem'>Fridge</Link>
-                            </li>
-                            <li>
-                                <Link
-                                    to='/grocery'
-                                    className='tabItem'>Grocery</Link>
-                            </li>
-                        </ul>
-                    </div>
+                    <ul className='displayTabs'>
+                        <li >
+                            <Link
+                                to='/'
+                                onClick={handleTabActive}
+                                className={tabActive === 'fridge' ? 'tabItem active' : 'tabItem'}>Fridge
+                            </Link>
+                        </li>
+                        <li>
+                            <Link
+                                to='/grocery'
+                                onClick={handleTabActive}
+                                className={tabActive === 'grocery' ? 'tabItem active' : 'tabItem'}>Grocery
+                            </Link>
+                        </li>
+                    </ul>
                 </nav>
+
+                {/* ROUTING LOGIC */}
                 <Routes>
+
+                    {/* FRIDGE PATH */}
                     <Route
                         path='/'
 
@@ -115,6 +133,8 @@ const ListsInfo = () => {
                                 handleChange={handleChange}
                                 handleSuggest={handleSuggest}
                             />} />
+
+                    {/* GROCERY PATH */}
                     <Route
                         path='/grocery'
                         element={
@@ -125,9 +145,10 @@ const ListsInfo = () => {
                                 pushFoodtoDB={pushFoodtoDB}
                                 handleChange={handleChange}
                                 handleSuggest={handleSuggest}
-
                             />} />
+                    {/* END OF ROUTING LOGIC */}
                 </Routes>
+
             </main>
         </>
 

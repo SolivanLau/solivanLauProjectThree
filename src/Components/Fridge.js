@@ -17,10 +17,10 @@ const dbFridgeRef = ref(database, `fridgeList/`)
 
 const Fridge = ({ userSearch, searchError, autoCompleteArr, pushFoodtoDB, handleChange, handleSuggest }) => {
 
-
     const fridgeMode = {
         title: 'fridge',
-        styleClass: 'fridge'
+        styleClass: 'fridge',
+        firebasePath: 'fridgeList'
     }
     // FRIDGE LIST STATE: contains all items from Firebase db to be rendered
     const [fridgeArr, setFridgeArr] = useState([])
@@ -32,8 +32,6 @@ const Fridge = ({ userSearch, searchError, autoCompleteArr, pushFoodtoDB, handle
         console.log('Fridge form is submitted')
         pushFoodtoDB(dbFridgeRef)
     }
-
-
 
 
     // FIREBASE check: on page load, onValue listens for changes in firebase => updates local fridgeArr state
@@ -66,8 +64,6 @@ const Fridge = ({ userSearch, searchError, autoCompleteArr, pushFoodtoDB, handle
 
     return (
         <section className="listDisplay fridge">
-            <h2>Fridge Display</h2>
-
             <Form
                 handleSubmit={handleSubmit}
                 handleChange={handleChange}

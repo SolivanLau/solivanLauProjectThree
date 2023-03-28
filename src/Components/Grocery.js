@@ -14,10 +14,13 @@ const database = getDatabase(firebaseDB)
 const dbGroceryRef = ref(database, `groceryList/`)
 
 const Grocery = ({ userSearch, searchError, autoCompleteArr, pushFoodtoDB, handleChange, handleSuggest }) => {
+
     const groceryMode = {
         title: 'Grocery List',
-        styleClass: 'grocery'
+        styleClass: 'grocery',
+        firebasePath: 'groceryList'
     }
+
     // GROCERY LIST STATE: contains all items from Firebase db to be rendered
     const [groceryArr, setGroceryArr] = useState([])
 
@@ -30,7 +33,6 @@ const Grocery = ({ userSearch, searchError, autoCompleteArr, pushFoodtoDB, handl
     useEffect(() => {
         onValue(dbGroceryRef, (groceryData) => {
             const remoteGroceryData = groceryData.val()
-            // console.log(remotefridgeData)
 
             const localGroceryArr = []
 
@@ -52,7 +54,6 @@ const Grocery = ({ userSearch, searchError, autoCompleteArr, pushFoodtoDB, handl
 
     return (
         <section className='listDisplay grocery'>
-            <h2>Grocery List</h2>
             <Form
                 handleSubmit={handleSubmit}
                 handleChange={handleChange}
