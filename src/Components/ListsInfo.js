@@ -19,29 +19,38 @@ const ListsInfo = () => {
     // AUTO COMPLETE STATE
     const [autoCompleteArr, setAutocompleteArr] = useState([])
 
-
+    const searchEval = (suggestion) => {
+        // return true/false if current suggestion's name matches user input
+        return suggestion.name === userSearch;
+    }
 
     const pushFoodtoDB = (reference) => {
+        console.log(autoCompleteArr);
+        const userSearchCheck = autoCompleteArr.every(searchEval)
 
-        // // IF EVERY suggestion does not match user's inputted item, create an error message
-        // autoCompleteArr.every((suggestion) => {
-        //     if (suggestion.name !== userSearch) {
-        //         setSearchError(true)
-        //     } else {
-        //         setSearchError(false)
+        // IF ALL suggestions does not match user's inputted item, create an error message
+        if (userSearchCheck === false) {
+            setSearchError(true)
+        } else {
+            // OTHERWISE remove error msg
+            setSearchError(false)
 
-        //         const foodItemObj = {
-        //             name: suggestion.name,
-        //             imageUrl: suggestion.image,
-        //             altText: `Image of a ${suggestion.name}`,
-        //             expDate: ''
-        //         }
+            // find matching item from arrray
+            const searchMatch = autoCompleteArr.find((foodItem) => { return foodItem.name === userSearch })
 
-        //         // push object to firebase
-        //         push(reference, foodItemObj)
-        //         setUserSearch('')
-        //     }
-        // })
+            // place needed values in a template obj
+            const foodItemObj = {
+                name: searchMatch.name,
+                imageUrl: searchMatch.image,
+                altText: `Image of a ${searchMatch.name}`,
+                expDate: ''
+            }
+
+            // push template object to firebase
+            push(reference, foodItemObj)
+            setUserSearch('')
+        }
+
     }
 
     // handle and control user text input
