@@ -1,4 +1,4 @@
-import './App.scss';
+import './css/App.css';
 
 // COMPONENT IMPORTS
 
