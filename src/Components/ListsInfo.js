@@ -2,7 +2,7 @@
 import { push } from 'firebase/database';
 // HOOKS
 import axios from 'axios';
-import { Link, Routes, Route } from 'react-router-dom';
+import { Link, Routes, Route, useLocation } from 'react-router-dom';
 import { useState, useEffect } from "react";
 
 // COMPONENTS
@@ -20,7 +20,7 @@ const ListsInfo = () => {
     const [autoCompleteArr, setAutocompleteArr] = useState([])
 
     // TAB ACTIVE CLASS STATE
-    const [tabActive, setTabActive] = useState('fridge')
+    const [tabActive, setTabActive] = useState('')
 
 
     // return true/false if current suggestion's name DOES NOT match user input
@@ -92,7 +92,23 @@ const ListsInfo = () => {
     const handleTabActive = (event) => {
         setTabActive(event.target.textContent.trim().toLowerCase())
     }
-    console.log(tabActive)
+
+    // useLocation returns obj w path information
+    const currentPath = useLocation().pathname
+    // checking active tab on refresh
+    useEffect(() => {
+
+        if (currentPath.length > 1) {
+            const currentPathKeyWord = currentPath.split('/')[1]
+
+            setTabActive(currentPathKeyWord)
+
+
+        } else {
+            setTabActive('fridge')
+        }
+    }, [currentPath])
+
     return (
         <>
             {/* MAIN CONTENT */}

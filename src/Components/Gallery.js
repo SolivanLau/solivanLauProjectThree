@@ -9,18 +9,16 @@ const Gallery = ({ currentArr, currentMode }) => {
 
             {currentArr.length <= 0 ? null : currentArr.map((foodItemObj) => {
                 return (
-                    <li
+                    <FoodItem
                         key={foodItemObj.id}
-                        className="foodItem">
 
-                        <FoodItem
-                            name={foodItemObj.foodName}
-                            fbId={foodItemObj.id}
-                            imgFile={foodItemObj.imgLink}
-                            altText={foodItemObj.altText}
-                            expDate={foodItemObj.expDate}
-                            currentMode={currentMode} />
-                    </li>)
+                        name={foodItemObj.foodName}
+                        fbId={foodItemObj.id}
+                        imgFile={foodItemObj.imgLink}
+                        altText={foodItemObj.altText}
+                        expDate={foodItemObj.expDate}
+                        currentMode={currentMode} />
+                )
             })}
         </ul>
 

@@ -1,5 +1,6 @@
 @use './variables' as *;
 
+
 // setting fontsize 125%
 html {
     font-size: 125%;
@@ -9,6 +10,10 @@ html {
 
 body {
     background-color: $black;
+}
+
+:focus-visible {
+    outline: 2px solid $green;
 }
 
 // strip styles

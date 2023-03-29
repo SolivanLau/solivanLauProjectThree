@@ -70,6 +70,7 @@ const Form = ({ handleChange, autoCompleteArr, handleSuggest, inputState, handle
                             <li
                                 key={suggestion.id}
                                 onClick={handleSuggest}
+                                tabIndex="0"
                                 className="suggestion">
 
                                 {suggestion.name}

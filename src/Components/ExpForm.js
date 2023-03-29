@@ -1,6 +1,6 @@
-const ExpForm = ({ handleExp, expDate }) => {
+const ExpForm = ({ handleUserDate, expDate }) => {
     // console.log(handleExp)
-    // console.log(expDate)
+    console.log(expDate)
 
     return (
         <form action="" className="expForm">
@@ -9,7 +9,7 @@ const ExpForm = ({ handleExp, expDate }) => {
                 type="date"
                 name="expDate"
                 id="expDate"
-                onChange={handleExp}
+                onChange={handleUserDate}
                 value={expDate}
             />
         </form>
