@@ -28,7 +28,6 @@ const Fridge = ({ userSearch, searchError, autoCompleteArr, pushFoodtoDB, handle
     // SUBMITING FORM: if EVERY item in the autocomplete list does NOT match update error state, OTHERWISE, take the data and push  to firebase + reset input  val
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log('Fridge form is submitted')
         pushFoodtoDB(dbFridgeRef)
     }
 

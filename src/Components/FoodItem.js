@@ -9,6 +9,8 @@ import ExpForm from './ExpForm';
 const database = getDatabase(firebaseDB)
 
 const FoodItem = ({ name, fbId, imgFile, altText, expDate, currentMode }) => {
+
+    const foodItemExpRef = ref(database, `fridgeList/${fbId}`)
     // STATES
 
     // userExp
@@ -38,9 +40,9 @@ const FoodItem = ({ name, fbId, imgFile, altText, expDate, currentMode }) => {
         setUserExp(event.target.value)
     }
 
-
     // when user input changes: check if date is valid (needs to be ahead of todays date)
     useEffect(() => {
+
         if (userExp !== '') {
 
             const today = new Date()
@@ -59,23 +61,16 @@ const FoodItem = ({ name, fbId, imgFile, altText, expDate, currentMode }) => {
                 console.log('passed vibe check')
 
                 setExpError(false)
-                updateFBExp()
+
+                // user selected date
+                const date = { expDate: userExp };
+                // take user input and update on firebase 
+                update(foodItemExpRef, date)
             }
         }
 
+    }, [userExp, foodItemExpRef])
 
-
-    }, [userExp])
-
-    // ONCHAGE, take user selected date and send to firebase
-    const updateFBExp = () => {
-        // user selected date
-        const date = { expDate: userExp };
-        // ref to specific firebase item
-        const foodItemExpRef = ref(database, `fridgeList/${fbId}`)
-        // take user input and update on firebase 
-        update(foodItemExpRef, date)
-    }
 
     // ANY TIME FIREBASE EXP VALUE CHANGES: 
     useEffect(() => {

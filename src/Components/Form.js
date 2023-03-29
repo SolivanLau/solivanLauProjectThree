@@ -63,7 +63,7 @@ const Form = ({ handleChange, autoCompleteArr, handleSuggest, inputState, handle
                 />
 
                 {/* autoComplete arr maps here */}
-                <ul className={inputActive === false ? 'suggestionList hidden' : 'suggestionList'}>
+                <ul tabindex="-1" className={inputActive === false ? 'suggestionList hidden' : 'suggestionList'}>
 
                     {autoCompleteArr < 1 ? null : autoCompleteArr.map((suggestion) => {
                         return (

@@ -28,6 +28,7 @@ const ListsInfo = () => {
         return suggestion.name !== userSearch;
     }
 
+
     // evaluates whether user input matches any suggestion, then pushes to db
     const pushFoodtoDB = (reference) => {
         // if no suggestions match user input, return true 
@@ -58,11 +59,14 @@ const ListsInfo = () => {
 
     }
 
+
     // handle and control user text input
     const handleChange = (event) => {
         const userInput = event.target.value.toLowerCase()
         setUserSearch(userInput)
     }
+
+
 
     // handle autocomplete items: sets userSearch(text input) to clicked value
     const handleSuggest = (event) => {
@@ -86,6 +90,8 @@ const ListsInfo = () => {
             // console.log(autoCompleteArr)
         })
     }, [userSearch])
+
+
 
     // TAB ACTIVE HANDLER: setsState to tab title (string), if that state is = to string, give class of active
 
@@ -113,59 +119,62 @@ const ListsInfo = () => {
         <>
             {/* MAIN CONTENT */}
             <main>
-                {/* NAV */}
-                <nav>
-                    <ul className='displayTabs'>
-                        <li >
-                            <Link
-                                to='/'
-                                onClick={handleTabActive}
-                                className={tabActive === 'fridge' ? 'tabItem active' : 'tabItem'}>Fridge
-                            </Link>
-                        </li>
-                        <li>
-                            <Link
-                                to='/grocery'
-                                onClick={handleTabActive}
-                                className={tabActive === 'grocery' ? 'tabItem active' : 'tabItem'}>Grocery
-                            </Link>
-                        </li>
-                    </ul>
-                </nav>
+                <div className="wrapper">
+                    {/* NAV */}
+                    <nav>
+                        <ul className='displayTabs'>
+                            <li >
+                                <Link
+                                    to='/'
+                                    onClick={handleTabActive}
+                                    className={tabActive === 'fridge' ? 'tabItem active' : 'tabItem'}>Fridge
+                                </Link>
+                            </li>
+                            <li>
+                                <Link
+                                    to='/grocery'
+                                    onClick={handleTabActive}
+                                    className={tabActive === 'grocery' ? 'tabItem active' : 'tabItem'}>Grocery
+                                </Link>
+                            </li>
+                        </ul>
+                    </nav>
 
-                {/* ROUTING LOGIC */}
-                <Routes>
+                    {/* ROUTING LOGIC */}
+                    <Routes>
 
-                    {/* FRIDGE PATH */}
-                    <Route
-                        path='/'
+                        {/* FRIDGE PATH */}
+                        <Route
+                            path='/'
 
-                        element={
-                            <Fridge
-                                userSearch={userSearch}
-                                searchError={searchError}
-                                autoCompleteArr={autoCompleteArr}
-                                pushFoodtoDB={pushFoodtoDB}
-                                handleChange={handleChange}
-                                handleSuggest={handleSuggest}
-                                setSearchError={setSearchError}
-                            />} />
+                            element={
+                                <Fridge
+                                    userSearch={userSearch}
+                                    searchError={searchError}
+                                    autoCompleteArr={autoCompleteArr}
+                                    pushFoodtoDB={pushFoodtoDB}
+                                    handleChange={handleChange}
+                                    handleSuggest={handleSuggest}
+                                    setSearchError={setSearchError}
+                                />} />
 
-                    {/* GROCERY PATH */}
-                    <Route
-                        path='/grocery'
-                        element={
-                            <Grocery
-                                userSearch={userSearch}
-                                searchError={searchError}
-                                autoCompleteArr={autoCompleteArr}
-                                pushFoodtoDB={pushFoodtoDB}
-                                handleChange={handleChange}
-                                handleSuggest={handleSuggest}
-                                setSearchError={setSearchError}
-                            />} />
-                    {/* END OF ROUTING LOGIC */}
-                </Routes>
+                        {/* GROCERY PATH */}
+                        <Route
+                            path='/grocery'
+                            element={
+                                <Grocery
+                                    userSearch={userSearch}
+                                    searchError={searchError}
+                                    autoCompleteArr={autoCompleteArr}
+                                    pushFoodtoDB={pushFoodtoDB}
+                                    handleChange={handleChange}
+                                    handleSuggest={handleSuggest}
+                                    setSearchError={setSearchError}
+                                />} />
+                        {/* END OF ROUTING LOGIC */}
+                    </Routes>
+
+                </div>
 
             </main>
         </>

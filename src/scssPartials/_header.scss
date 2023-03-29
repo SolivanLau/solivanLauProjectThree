@@ -4,6 +4,7 @@
 // HEADER 
 h1 {
     font-size: 2.5rem;
+    margin-top: 40px;
 }
 
 // NAV SECTION
@@ -48,16 +49,14 @@ nav {
     gap: 20px;
 
 
-
-
     background-color: $white;
     color: $black;
 
 
-
     input[type=text] {
-        border-radius: 10px 0 0 10px;
+        border-radius: 10px;
         width: 100%;
+        border: none;
     }
 
     label {
