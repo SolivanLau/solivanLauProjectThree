@@ -13,7 +13,7 @@ import Gallery from './Gallery';
 const database = getDatabase(firebaseDB)
 const dbGroceryRef = ref(database, `groceryList/`)
 
-const Grocery = ({ userSearch, searchError, autoCompleteArr, pushFoodtoDB, handleChange, handleSuggest }) => {
+const Grocery = ({ userSearch, searchError, autoCompleteArr, pushFoodtoDB, handleChange, handleSuggest, setSearchError }) => {
 
     const groceryMode = {
         title: 'Grocery List',
@@ -62,6 +62,7 @@ const Grocery = ({ userSearch, searchError, autoCompleteArr, pushFoodtoDB, handl
                 inputState={userSearch}
                 searchError={searchError}
                 currentMode={groceryMode}
+                setSearchError={setSearchError}
             />
 
             <Gallery

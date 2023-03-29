@@ -9,3 +9,30 @@ $yellow: #F8EC85;
 // hover
 
 $hoverGreen: #a2c971;
+
+
+// Animations
+
+@keyframes inputError {
+    from {
+        opacity: 0;
+        top: -50px;
+    }
+
+    to {
+        opacity: 1;
+        top: -64px;
+    }
+}
+
+@keyframes expError {
+    from {
+        opacity: 0;
+        top: -50px;
+    }
+
+    to {
+        opacity: 1;
+        top: -64px;
+    }
+}

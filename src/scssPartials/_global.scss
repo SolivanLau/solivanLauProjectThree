@@ -88,7 +88,7 @@ button {
 .errorMsg {
     //postioning
     position: absolute;
-
+    font-size: .8rem;
     width: 100%;
     background-color: $grey;
     border-radius: 10px;
@@ -110,14 +110,22 @@ button {
     display: none;
 }
 
+.attention {
+    font-weight: bold;
+    color: $green;
+}
 
 // general section styles
 
 .appContainer {
-    height: 99vh;
+    height: 99.8vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    background-image: url(../assets/appBG.svg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 header,

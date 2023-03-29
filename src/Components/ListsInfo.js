@@ -132,6 +132,7 @@ const ListsInfo = () => {
                                 pushFoodtoDB={pushFoodtoDB}
                                 handleChange={handleChange}
                                 handleSuggest={handleSuggest}
+                                setSearchError={setSearchError}
                             />} />
 
                     {/* GROCERY PATH */}
@@ -145,6 +146,7 @@ const ListsInfo = () => {
                                 pushFoodtoDB={pushFoodtoDB}
                                 handleChange={handleChange}
                                 handleSuggest={handleSuggest}
+                                setSearchError={setSearchError}
                             />} />
                     {/* END OF ROUTING LOGIC */}
                 </Routes>

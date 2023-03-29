@@ -8,14 +8,13 @@ import { useState, useEffect } from "react";
 import Form from "./Form";
 import Gallery from './Gallery';
 
-
 // database details and reference
 const database = getDatabase(firebaseDB)
 const dbFridgeRef = ref(database, `fridgeList/`)
 
 
 
-const Fridge = ({ userSearch, searchError, autoCompleteArr, pushFoodtoDB, handleChange, handleSuggest }) => {
+const Fridge = ({ userSearch, searchError, autoCompleteArr, pushFoodtoDB, handleChange, handleSuggest, setSearchError }) => {
 
     const fridgeMode = {
         title: 'fridge',
@@ -72,6 +71,7 @@ const Fridge = ({ userSearch, searchError, autoCompleteArr, pushFoodtoDB, handle
                 inputState={userSearch}
                 searchError={searchError}
                 currentMode={fridgeMode}
+                setSearchError={setSearchError}
             />
 
             <Gallery

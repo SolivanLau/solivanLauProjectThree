@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react"
 
-const Form = ({ handleChange, autoCompleteArr, handleSuggest, inputState, handleSubmit, searchError, currentMode }) => {
+const Form = ({ handleChange, autoCompleteArr, handleSuggest, inputState, handleSubmit, searchError, currentMode, setSearchError }) => {
 
 
     const [inputActive, setInputActive] = useState(false)
@@ -20,11 +20,26 @@ const Form = ({ handleChange, autoCompleteArr, handleSuggest, inputState, handle
             }
         }
 
-        // addind click event listener to window
+        // adding click event listener to window
         window.addEventListener('click', handleWindowClick)
+
         return () => window.removeEventListener('click', handleWindowClick)
     }, [])
 
+    // On component mount: when searchError is false, next flick will remove the error
+    useEffect(() => {
+
+        const removeError = () => {
+            if (searchError === true) {
+                setSearchError(false)
+            }
+        }
+        // adding click event listener to window
+        window.addEventListener('click', removeError)
+
+        return () => window.removeEventListener('click', removeError)
+
+    }, [searchError, setSearchError])
 
     return (
         <form onSubmit={handleSubmit} className={`listForm ${currentMode.title}`} autoComplete="off">
@@ -39,7 +54,7 @@ const Form = ({ handleChange, autoCompleteArr, handleSuggest, inputState, handle
                     type="text"
                     name="fridgeStock"
                     id="fridgeStock"
-                    placeholder={`Add food to your ${currentMode.title}`}
+                    placeholder={`Add food to your ${currentMode.title.toLowerCase()}`}
                     className={` ${currentMode.title}input`}
                     onChange={handleChange}
                     value={inputState}
@@ -64,7 +79,14 @@ const Form = ({ handleChange, autoCompleteArr, handleSuggest, inputState, handle
                 </ul>
 
                 {searchError === true ?
-                    <p className="errorMsg">please submit an food item that matches a suggestion!</p> : null
+                    <div className="errorMsg">
+                        <p>Add an item that matches a suggestion!</p>
+                        <div className="attentionContainer">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 96 960 960">
+                                <path d="M479.911 936Q451 936 430.5 915.411q-20.5-20.588-20.5-49.5Q410 837 430.589 816.5q20.588-20.5 49.5-20.5Q509 796 529.5 816.589q20.5 20.588 20.5 49.5Q550 895 529.411 915.5q-20.588 20.5-49.5 20.5Zm0-240Q451 696 430.5 675.438 410 654.875 410 626V286q0-28.875 20.589-49.438Q451.177 216 480.089 216 509 216 529.5 236.562 550 257.125 550 286v340q0 28.875-20.589 49.438Q508.823 696 479.911 696Z" />
+                            </svg>
+                        </div>
+                    </div> : null
                 }
                 <button className="symbolBtn addBtn">
                     <span className="sr-only">

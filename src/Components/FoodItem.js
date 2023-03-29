@@ -11,6 +11,7 @@ const database = getDatabase(firebaseDB)
 const FoodItem = ({ name, fbId, imgFile, altText, expDate, currentMode }) => {
     // STATES
 
+
     // DIFFERENCE of user selected exp date vs. today's date
     const [daysToExpire, setDaysToExpire] = useState('');
 
@@ -19,6 +20,7 @@ const FoodItem = ({ name, fbId, imgFile, altText, expDate, currentMode }) => {
 
 
     // FUNCTIONS
+
 
     //REMOVE BUTTON: removes item from firebase via id, onvalue updateslocal array, gallery contents rerender
     const handleRemove = () => {
@@ -38,6 +40,7 @@ const FoodItem = ({ name, fbId, imgFile, altText, expDate, currentMode }) => {
 
     // ANY TIME USER CHANGES DATE INPUT VAL: calc difference and display to page
     useEffect(() => {
+
         // if user's set exp date is NOT an empty string, calc difference of today's date and user date
         if (expDate) {
             const today = new Date()
@@ -59,13 +62,23 @@ const FoodItem = ({ name, fbId, imgFile, altText, expDate, currentMode }) => {
 
     }, [expDate])
 
+    useEffect(() => {
+        const removeExpError = () => {
+            if (expError === true) {
+                setExpError(false)
+            }
+        }
+        // adding click event listener to window
+        window.addEventListener('click', removeExpError)
 
+        return () => window.removeEventListener('click', removeExpError)
+    }, [expError])
 
     return (
         // FOOD ITEM: parent is li w className= FOODITEM
         <>
             {/* FOOD ITEM'S NAME */}
-            <h3>{name}</h3>
+            <h3 className='foodTitle'>{name}</h3>
 
 
             {/* FOOD ITEM'S IMG */}
@@ -108,7 +121,7 @@ const FoodItem = ({ name, fbId, imgFile, altText, expDate, currentMode }) => {
                         {expError === true ?
 
                             <p className='errorMsg'>
-                                Please enter a date <span className="attention">after</span> today's date... otherwise you may have some stinky {name}
+                                Enter a date <span className="attention">after</span> today's date... or you might have some stinky {name}
                             </p> : null}
 
                     </div>
