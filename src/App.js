@@ -1,7 +1,6 @@
 import './css/App.css';
 
 // COMPONENT IMPORTS
-
 import ListsInfo from './Components/ListsInfo';
 
 function App() {

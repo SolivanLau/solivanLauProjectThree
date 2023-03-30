@@ -360,7 +360,7 @@ button svg {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-image: url(../assets/appBG.svg);
+  background-image: url(../assets/fridgeBg.svg);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -369,6 +369,16 @@ button svg {
 header,
 footer {
   text-align: center;
+}
+
+.dynamicBG {
+  width: 100%;
+  height: 100%;
+  background-color: #79A3E0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -10;
 }
 
 main {
@@ -542,6 +552,7 @@ nav {
   height: 280px;
   z-index: 10;
   transition: 0.5s ease;
+  position: relative;
 }
 
 .expired {

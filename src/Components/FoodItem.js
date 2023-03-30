@@ -120,6 +120,7 @@ const FoodItem = ({ name, fbId, imgFile, altText, expDate, currentMode }) => {
     return (
         // FOOD ITEM: parent is li w className= FOODITEM
         <li className={expired ? "foodItem expired" : "foodItem"}>
+
             {/* FOOD ITEM'S NAME */}
             <h3 className='foodTitle'>{name}</h3>
 

@@ -22,6 +22,8 @@ const Gallery = ({ currentArr, currentMode }) => {
             })}
         </ul>
 
+
+
     )
 }
 
