@@ -37,3 +37,20 @@ $hoverGreen: #a2c971;
         top: -64px;
     }
 }
+
+@keyframes attention {
+    0% {
+        opacity: 0;
+        scale: .9;
+    }
+
+    40% {
+        scale: 1.13;
+
+    }
+
+    100% {
+        opacity: 1;
+        scale: 1;
+    }
+}

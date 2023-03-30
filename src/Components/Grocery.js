@@ -18,7 +18,9 @@ const Grocery = ({ userSearch, searchError, autoCompleteArr, pushFoodtoDB, handl
     const groceryMode = {
         title: 'Grocery List',
         styleClass: 'grocery',
-        firebasePath: 'groceryList'
+        firebasePath: 'groceryList',
+        switchFirebasePath: 'fridgeList',
+        switchListTitle: 'fridge'
     }
 
     // GROCERY LIST STATE: contains all items from Firebase db to be rendered

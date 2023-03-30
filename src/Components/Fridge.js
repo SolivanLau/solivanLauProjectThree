@@ -19,7 +19,9 @@ const Fridge = ({ userSearch, searchError, autoCompleteArr, pushFoodtoDB, handle
     const fridgeMode = {
         title: 'fridge',
         styleClass: 'fridge',
-        firebasePath: 'fridgeList'
+        firebasePath: 'fridgeList',
+        switchFirebasePath: 'groceryList',
+        switchListTitle: 'grocery list'
     }
     // FRIDGE LIST STATE: contains all items from Firebase db to be rendered
     const [fridgeArr, setFridgeArr] = useState([])

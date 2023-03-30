@@ -94,6 +94,8 @@ nav {
     svg {
         fill: $red
     }
+
+    animation: attention 0.5s forwards;
 }
 
 .suggestionList {

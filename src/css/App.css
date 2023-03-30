@@ -239,6 +239,19 @@ html {
     top: -64px;
   }
 }
+@keyframes attention {
+  0% {
+    opacity: 0;
+    scale: 0.9;
+  }
+  40% {
+    scale: 1.13;
+  }
+  100% {
+    opacity: 1;
+    scale: 1;
+  }
+}
 html {
   font-size: 125%;
   scroll-behavior: smooth;
@@ -299,10 +312,10 @@ button svg {
   height: 40px;
   border: none;
   border-radius: 10px;
-  transition: 0.3s ease;
+  transition: 0.2s ease;
 }
 .symbolBtn:hover, .symbolBtn:focus {
-  scale: 1.1;
+  scale: 1.15;
 }
 
 .addBtn {
@@ -438,6 +451,7 @@ nav {
   aspect-ratio: 1/1;
   border: 2px solid #F4705E;
   border-radius: 50%;
+  animation: attention 0.5s forwards;
 }
 .attentionContainer svg {
   fill: #F4705E;
@@ -569,6 +583,12 @@ nav {
   width: 200px;
   top: 80px;
   right: -60px;
+}
+
+.buttonContainer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
 
 @media (max-width: 500px) {

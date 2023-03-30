@@ -26,7 +26,8 @@ const Form = ({ handleChange, autoCompleteArr, handleSuggest, inputState, handle
         return () => window.removeEventListener('click', handleWindowClick)
     }, [])
 
-    // On component mount: when searchError is false, next flick will remove the error
+
+    // On component mount: when searchError is false, next click will remove the error
     useEffect(() => {
 
         const removeError = () => {
@@ -40,6 +41,15 @@ const Form = ({ handleChange, autoCompleteArr, handleSuggest, inputState, handle
         return () => window.removeEventListener('click', removeError)
 
     }, [searchError, setSearchError])
+
+    // WHEN SUGGESTION IS IN FOCUS: listen for enter key to fill suggestion
+    const handleFocus = (event) => {
+        event.target.addEventListener("keyup", (event) => {
+            if (event.keyCode === 13) {
+                handleSuggest(event)
+            }
+        })
+    }
 
     return (
         <form onSubmit={handleSubmit} className={`listForm ${currentMode.title}`} autoComplete="off">
@@ -63,13 +73,14 @@ const Form = ({ handleChange, autoCompleteArr, handleSuggest, inputState, handle
                 />
 
                 {/* autoComplete arr maps here */}
-                <ul tabindex="-1" className={inputActive === false ? 'suggestionList hidden' : 'suggestionList'}>
+                <ul tabIndex="-1" className={inputActive === false ? 'suggestionList hidden' : 'suggestionList'}>
 
                     {autoCompleteArr < 1 ? null : autoCompleteArr.map((suggestion) => {
                         return (
                             <li
                                 key={suggestion.id}
                                 onClick={handleSuggest}
+                                onFocus={handleFocus}
                                 tabIndex="0"
                                 className="suggestion">
 
