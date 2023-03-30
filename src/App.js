@@ -16,7 +16,8 @@ function App() {
 
       <footer>
         <div className="wrapper">
-          <p>Made by Solivan Lau at JunoCollege 2023</p>
+          <p>
+            Made by <a href="https://www.solivanlau.com" target="_blank" rel="noopener noreferrer" className="connectLink">Solivan Lau</a> at <a href="https://www.junocollege.com/" target="_blank" rel="noopener noreferrer" className="connectLink">JunoCollege</a> 2023</p>
         </div>
       </footer>
     </div>
