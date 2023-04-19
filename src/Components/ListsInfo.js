@@ -106,12 +106,9 @@ const ListsInfo = () => {
 
         if (currentPath.length > 1) {
             const currentPathKeyWord = currentPath.split('/')[1]
-
             setTabActive(currentPathKeyWord)
-
-
         } else {
-            setTabActive('fridge')
+            setTabActive('about')
         }
     }, [currentPath])
 
@@ -123,23 +120,9 @@ const ListsInfo = () => {
                     {/* NAV */}
                     <nav>
                         <ul className='displayTabs'>
-                            <li >
+                            <li>
                                 <Link
                                     to='/'
-                                    onClick={handleTabActive}
-                                    className={tabActive === 'fridge' ? 'tabItem active' : 'tabItem'}>Fridge
-                                </Link>
-                            </li>
-                            <li>
-                                <Link
-                                    to='/grocery'
-                                    onClick={handleTabActive}
-                                    className={tabActive === 'grocery' ? 'tabItem active' : 'tabItem'}>Grocery
-                                </Link>
-                            </li>
-                            <li>
-                                <Link
-                                    to='/about'
                                     className={tabActive === 'about' ? 'tabItem active' : 'tabItem'}
                                     onClick={handleTabActive}>
 
@@ -152,15 +135,34 @@ const ListsInfo = () => {
 
                                 </Link>
                             </li>
+                            <li >
+                                <Link
+                                    to='/fridge'
+                                    onClick={handleTabActive}
+                                    className={tabActive === 'fridge' ? 'tabItem active' : 'tabItem'}>Fridge
+                                </Link>
+                            </li>
+                            <li>
+                                <Link
+                                    to='/grocery'
+                                    onClick={handleTabActive}
+                                    className={tabActive === 'grocery' ? 'tabItem active' : 'tabItem'}>Grocery
+                                </Link>
+                            </li>
+
                         </ul>
                     </nav>
 
                     {/* ROUTING LOGIC */}
                     <Routes>
-
-                        {/* FRIDGE PATH */}
+                        {/* ABOUT PATH */}
                         <Route
                             path='/'
+                            element={<About />}
+                        />
+                        {/* FRIDGE PATH */}
+                        <Route
+                            path='/fridge'
 
                             element={
                                 <Fridge
@@ -186,13 +188,6 @@ const ListsInfo = () => {
                                     handleSuggest={handleSuggest}
                                     setSearchError={setSearchError}
                                 />} />
-
-
-                        <Route
-                            path='/about'
-                            element={<About />}
-
-                        />
                         {/* END OF ROUTING LOGIC */}
                     </Routes>
 

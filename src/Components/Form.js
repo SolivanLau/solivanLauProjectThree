@@ -10,20 +10,18 @@ const Form = ({ handleChange, autoCompleteArr, handleSuggest, inputState, handle
 
 
     // On component render: check user click is on input via useRef -> if false, add hidden class to hide autoComplete list
+    // handler that checks if clicked event matches input ref
+    const handleActiveInput = (event) => {
+        inputRef.current === document.activeElement ? setInputActive(true) : setInputActive(false);
+    }
+
     useEffect(() => {
-        // handler that checks if clicked event matches input ref
-        const handleWindowClick = (event) => {
-            if (inputRef.current.contains(event.target)) {
-                setInputActive(true)
-            } else {
-                setInputActive(false)
-            }
-        }
-
         // adding click event listener to window
-        window.addEventListener('click', handleWindowClick)
+        window.addEventListener('click', handleActiveInput)
 
-        return () => window.removeEventListener('click', handleWindowClick)
+        return () => {
+            window.removeEventListener('click', handleActiveInput);
+        }
     }, [])
 
 
@@ -67,6 +65,7 @@ const Form = ({ handleChange, autoCompleteArr, handleSuggest, inputState, handle
                     placeholder={`Add food to your ${currentMode.title.toLowerCase()}`}
                     className={` ${currentMode.title}input`}
                     onChange={handleChange}
+                    onFocus={handleActiveInput}
                     value={inputState}
                     ref={inputRef}
 
