@@ -59,7 +59,6 @@ const FoodItem = ({ name, fbId, imgFile, altText, expDate, currentMode }) => {
 
     // when user input changes: check if date is valid (needs to be ahead of todays date)
     useEffect(() => {
-        console.log(userExp)
         if (userExp !== '') {
 
             const today = new Date()
@@ -71,11 +70,9 @@ const FoodItem = ({ name, fbId, imgFile, altText, expDate, currentMode }) => {
 
             if (diffDays < 0) {
 
-                console.log('ERROR - will NOT be sent to DB')
                 setExpError(true)
             } else {
 
-                console.log('passed vibe check')
 
                 setExpError(false)
 
@@ -89,7 +86,6 @@ const FoodItem = ({ name, fbId, imgFile, altText, expDate, currentMode }) => {
         }
 
     }, [userExp, foodItemExpRef])
-    console.log(userExp)
 
     // ANY TIME FIREBASE EXP VALUE CHANGES: 
     useEffect(() => {
