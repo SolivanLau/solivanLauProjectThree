@@ -120,7 +120,6 @@ const FoodItem = ({ name, fbId, imgFile, altText, expDate, currentMode }) => {
             {/* FOOD ITEM'S NAME */}
             <h3 className='foodTitle'>{name}</h3>
 
-
             {/* FOOD ITEM'S IMG */}
 
             <div className="foodImgContainer">

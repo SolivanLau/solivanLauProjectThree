@@ -54,3 +54,9 @@ $hoverGreen: #a2c971;
         scale: 1;
     }
 }
+
+@keyframes foodItemAppear {
+    100% {
+        opacity: 100%;
+    }
+}

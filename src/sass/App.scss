@@ -4,8 +4,8 @@
 @use './scssPartials/global';
 
 // app specific sections
-@use './scssPartials/header';
-@use './scssPartials/listDisplay';
+@use './scssPartials/nav';
+@use './scssPartials/tabDisplay';
 @use './scssPartials/foodItem';
 
 // media queries
