@@ -2,7 +2,7 @@
 
 
 .listDisplay,
-.aboutDisplay {
+.tabDisplay {
     max-width: 700px;
     width: 100%;
     height: 100%;
@@ -30,7 +30,6 @@
 
     &.fridge {
         background-color: $white;
-
     }
 
     &.grocery {
@@ -121,3 +120,44 @@
         margin: 10px;
     }
 }
+
+
+// auth modal
+
+// auth tab
+.tabDisplay .authForm {
+    background-color: $white;
+    color: $black;
+    width: 100%;
+    height: 100%;
+    border-radius: 0 0 10px 10px;
+
+}
+
+.authForm {
+    .wrapper {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .inputContainer {
+        display: flex;
+        flex-direction: column;
+        width: 250px;
+
+        input {}
+    }
+
+    .passwordContainer {
+        display: flex;
+        width: 250px;
+
+
+        .seePassBtn {
+            width: 30px;
+        }
+    }
+}
+
+// auth modal

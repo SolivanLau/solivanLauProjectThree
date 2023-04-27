@@ -1,5 +1,7 @@
 // FIREBASE INTEGRATION
 import { push } from 'firebase/database';
+
+
 // HOOKS
 import axios from 'axios';
 import { Link, Routes, Route, useLocation } from 'react-router-dom';
@@ -9,6 +11,7 @@ import { useState, useEffect } from "react";
 import Fridge from './Fridge';
 import Grocery from './Grocery';
 import About from './About';
+import SignIn from './SignIn';
 const ListsInfo = () => {
     // SEARCH INPUT STATES
 
@@ -159,6 +162,14 @@ const ListsInfo = () => {
                                 </Link>
                             </li>
 
+                            <li>
+                                <Link
+                                    to='/signIn'
+                                    onClick={handleTabActive}
+                                    className={tabActive === 'signIn' ? 'tabItem active' : 'tabItem'}>
+                                    Sign In
+                                </Link>
+                            </li>
                         </ul>
                     </nav>
 
@@ -168,6 +179,16 @@ const ListsInfo = () => {
                         <Route
                             path='/'
                             element={<About />}
+                        />
+
+                        {/* SIGN IN PATH */}
+                        <Route
+                            path='/signIn'
+                            element={
+                                <div className='tabDisplay'>
+                                    <SignIn />
+                                </div>
+                            }
                         />
                         {/* FRIDGE PATH */}
                         <Route

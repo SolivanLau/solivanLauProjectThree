@@ -1,5 +1,5 @@
 // firebase integration
-import firebaseDB from './Firebase';
+import { firebaseDB } from './Firebase';
 import { getDatabase, ref, onValue } from 'firebase/database';
 // hooks
 import { useState, useEffect } from "react";

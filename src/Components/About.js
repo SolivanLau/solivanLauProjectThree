@@ -5,7 +5,7 @@ const About = () => {
 
     const todayWeekday = daysOfWeek[weekday]
     return (
-        <section className="aboutDisplay">
+        <section className="tabDisplay">
             <article className="aboutApp">
                 <h2>A {`${todayWeekday}`} Night And ... <span className="emphasis">Empty</span>  Fridge</h2>
 
