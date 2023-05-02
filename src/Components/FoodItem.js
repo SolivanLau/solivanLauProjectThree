@@ -1,6 +1,6 @@
 // firebase integration
 import { firebaseDB } from './Firebase';
-import { getDatabase, ref, remove, update, push } from 'firebase/database';
+import { getDatabase, ref, remove, update, push, get } from 'firebase/database';
 import { useEffect, useState } from 'react';
 
 import ExpForm from './ExpForm';
@@ -10,7 +10,7 @@ const database = getDatabase(firebaseDB)
 
 const FoodItem = ({ name, fbId, imgFile, altText, expDate, currentMode }) => {
 
-    const foodItemExpRef = ref(database, `fridgeList/${fbId}`)
+    const foodItemExpRef = ref(database, `${currentMode.firebasePath}/${fbId}`)
     // STATES
 
     // userExp
@@ -32,6 +32,11 @@ const FoodItem = ({ name, fbId, imgFile, altText, expDate, currentMode }) => {
     //REMOVE BUTTON: removes item from firebase via id, onvalue updateslocal array, gallery contents rerender
     const handleRemove = () => {
         const foodItemRef = ref(database, `${currentMode.firebasePath}/${fbId}`)
+        get(foodItemExpRef, (snapshot) => {
+            if (snapshot.exists()) {
+                console.log(snapshot.val())
+            }
+        })
         remove(foodItemRef)
     }
 

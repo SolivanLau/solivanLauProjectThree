@@ -11,7 +11,6 @@ const Gallery = ({ currentArr, currentMode }) => {
                 return (
                     <FoodItem
                         key={foodItemObj.id}
-
                         name={foodItemObj.foodName}
                         fbId={foodItemObj.id}
                         imgFile={foodItemObj.imgLink}

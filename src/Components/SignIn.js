@@ -1,6 +1,14 @@
 import { useEffect, useState } from "react";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
-const SignIn = () => {
+import { useNavigate } from "react-router-dom";
+
+import { firebaseDB, firebaseAuth } from "./Firebase";
+import { set, getDatabase, ref, get } from "firebase/database";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+const SignIn = ({ setUserPath }) => {
+    // control generic input
+    const controlFormInput = (event, setState) => {
+        setState(event.target.value)
+    }
 
     // controlled inputs
     const [userName, setUserName] = useState('');
@@ -13,20 +21,27 @@ const SignIn = () => {
     // error state
     const [authError, setAuthError] = useState('')
 
-    // control generic input
-    const controlFormInput = (event, setState) => {
-        setState(event.target.value)
-    }
+    const navigate = useNavigate()
 
 
+
+
+
+    // FIREBASE
+    // database details and reference
+    const database = getDatabase(firebaseDB)
 
     const signUp = (auth) => {
         console.log('trying to sign up')
+
         userName.length === 0 || password.length === 0 ? setAuthError('Please make sure your email or password is filled in!') :
             createUserWithEmailAndPassword(auth, email, password)
                 .then((userCred) => {
                     console.log(userCred)
                     //set up firebase db w a new path
+                    const newUserUid = userCred.user.uid;
+                    // create new user space in db
+                    set(ref(database, 'users/' + newUserUid), { userName: userName });
                 })
                 .catch((error) => {
                     const errorCode = error.code;
@@ -37,12 +52,27 @@ const SignIn = () => {
 
     const login = (auth) => {
         console.log('trying to Login!')
+
         signInWithEmailAndPassword(auth, email, password)
             .then((userCred) => {
-                console.log(userCred)
-                console.log(auth.currentUser)
+                const userUid = userCred.user.uid;
+                console.log('welcome! ' + userUid)
+                const userDBref = ref(database, 'users/' + userUid)
 
-                console.log('welcome!')
+                get(userDBref)
+                    .then((snapshot) => {
+                        if (snapshot.exists()) {
+                            console.log('user db exists')
+                            navigate('/fridge')
+                        }
+                        else {
+                            console.log('user db does not exist')
+                            set(userDBref, { user: 'test' });
+                            console.log('created user db')
+                            navigate('/fridge')
+                        }
+                    })
+
             })
             .catch((error) => {
                 const errorCode = error.code;
@@ -54,24 +84,26 @@ const SignIn = () => {
     // // HANDLER: SIGN IN
     const handleSubmit = (event) => {
         event.preventDefault();
-        const auth = getAuth();
-
-        signUpMode ? signUp(auth) : login(auth);
+        signUpMode ? signUp(firebaseAuth) : login(firebaseAuth);
     }
-
-    useEffect(() => {
-        setUserName('')
-        setEmail('')
-        setPassword('')
-    }, [])
 
     // testing: Error log for auth
     useEffect(() => {
         if (authError) {
             console.log(authError)
         }
-
     }, [authError])
+
+
+    useEffect(() => {
+        if (signUpMode) {
+            console.log('sign up mode')
+        } else {
+            console.log('log in mode')
+        }
+    }, [signUpMode])
+
+
     return (
 
         <form action="#" onSubmit={handleSubmit} className="authForm">
@@ -120,7 +152,7 @@ const SignIn = () => {
                         <button
                             type="button"
                             onClick={() => { setPassVisible(!passVisible) }}
-                            className="seePassBtn"
+                            className="seePassBtn signInBtns"
                         >
                             {passVisible ?
                                 <span className="sr-only">
@@ -136,12 +168,34 @@ const SignIn = () => {
                     </div>
                 </div>
 
-                {/* BUTTONS */}
-                <button type="submit">{!signUpMode ? `Log In` : `Register`}</button>
-                <p>{!signUpMode ? `Need an account?` : `Already have an account?`}</p>
-                <button
-                    type="button"
-                    onClick={() => { setSignUpMode(!signUpMode) }}>{!signUpMode ? `Register` : `Login`} here</button>
+                <div className="authBtnsContainer">
+                    {/* FORM SUBMIT BTN */}
+                    <button type="submit" className="signInBtns submitBtn">{!signUpMode ? `Log In` : `Register`}</button>
+
+
+                    <div className="altModeContainer">
+                        <p>{!signUpMode ? `Need an account?` : `Already have an account?`}</p>
+
+                        <button
+                            type="button"
+                            className="signInBtns"
+                            onClick={() => { setSignUpMode(!signUpMode) }}>
+                            {!signUpMode ? `Register` : `Login`} here
+                        </button>
+                    </div>
+
+                    <div className="demoContainer">
+                        <p>No time⌚? Try the public demo!</p>
+
+                        <button
+                            type="submit"
+                            className="signInBtns"
+                            onClick={() => { navigate('/fridge') }}>
+                            Try Demo
+                        </button>
+                    </div>
+
+                </div>
             </div>
 
         </form>

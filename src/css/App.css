@@ -440,16 +440,30 @@ nav {
   gap: 5px;
 }
 
+.signOutTab {
+  border: none;
+}
+.signOutTab:focus-visible {
+  outline: 2px solid #C5F48B;
+}
+
 .tabItem {
   display: block;
   border-radius: 10px 10px 0 0;
   padding: 5px 10px;
-  background-color: grey;
+  background-color: #999999;
   color: #191919;
   transition: 0.2s ease;
 }
+.tabItem:hover {
+  background-color: #868585;
+}
 
 .active {
+  background-color: #efefef;
+  transition: 0.2s ease;
+}
+.active:hover {
   background-color: #efefef;
 }
 
@@ -617,6 +631,10 @@ nav {
   margin: 10px;
 }
 
+.updateContainer h3 {
+  margin: 0 0 15px;
+}
+
 .tabDisplay .authForm {
   background-color: #efefef;
   color: #191919;
@@ -641,6 +659,34 @@ nav {
 }
 .authForm .passwordContainer .seePassBtn {
   width: 30px;
+}
+
+.authBtnsContainer,
+.altModeContainer,
+.demoContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.authBtnsContainer {
+  gap: 15px;
+}
+
+.altModeContainer,
+.demoContainer {
+  gap: 10px;
+}
+
+.signInBtns {
+  padding: 5px 15px;
+  border-radius: 10px;
+  border: 3px solid #999999;
+  transition: 0.2s ease;
+}
+
+.submitBtn {
+  border-color: #a2c971;
 }
 
 .foodItem {

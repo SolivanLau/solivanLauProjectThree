@@ -11,16 +11,16 @@ import Gallery from './Gallery';
 
 // database details and reference
 const database = getDatabase(firebaseDB)
-const dbGroceryRef = ref(database, `groceryList/`)
 
-const Grocery = ({ userSearch, searchError, autoCompleteArr, pushFoodtoDB, handleChange, handleSuggest, setSearchError }) => {
+const Grocery = ({ userSearch, searchError, autoCompleteArr, pushFoodtoDB, handleChange, handleSuggest, setSearchError, userPath }) => {
 
+    const dbGroceryRef = ref(database, `users/${userPath}/groceryList/`)
     const groceryMode = {
         title: 'Grocery List',
         styleClass: 'grocery',
-        firebasePath: 'groceryList',
-        switchFirebasePath: 'fridgeList',
-        switchListTitle: 'fridge'
+        firebasePath: `users/${userPath}/groceryList`,
+        switchFirebasePath: `users/${userPath}/fridgeList`,
+        switchListTitle: `users/${userPath}/fridge`
     }
 
     // GROCERY LIST STATE: contains all items from Firebase db to be rendered
@@ -52,7 +52,7 @@ const Grocery = ({ userSearch, searchError, autoCompleteArr, pushFoodtoDB, handl
 
             setGroceryArr(localGroceryArr)
         })
-    }, [])
+    }, [dbGroceryRef])
 
     return (
         <section className='listDisplay grocery'>

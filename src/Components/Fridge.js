@@ -10,18 +10,18 @@ import Gallery from './Gallery';
 
 // database details and reference
 const database = getDatabase(firebaseDB)
-const dbFridgeRef = ref(database, `fridgeList/`)
 
 
 
-const Fridge = ({ userSearch, searchError, autoCompleteArr, pushFoodtoDB, handleChange, handleSuggest, setSearchError }) => {
+const Fridge = ({ userSearch, searchError, autoCompleteArr, pushFoodtoDB, handleChange, handleSuggest, setSearchError, userPath }) => {
+    const dbFridgeRef = ref(database, `users/${userPath}/fridgeList/`)
 
     const fridgeMode = {
         title: 'fridge',
         styleClass: 'fridge',
-        firebasePath: 'fridgeList',
-        switchFirebasePath: 'groceryList',
-        switchListTitle: 'grocery list'
+        firebasePath: `users/${userPath}/fridgeList`,
+        switchFirebasePath: `users/${userPath}/groceryList`,
+        switchListTitle: `users/${userPath}/grocery list`
     }
     // FRIDGE LIST STATE: contains all items from Firebase db to be rendered
     const [fridgeArr, setFridgeArr] = useState([])
@@ -56,7 +56,7 @@ const Fridge = ({ userSearch, searchError, autoCompleteArr, pushFoodtoDB, handle
 
             setFridgeArr(localFridgeArr)
         })
-    }, [])
+    }, [dbFridgeRef])
 
 
 

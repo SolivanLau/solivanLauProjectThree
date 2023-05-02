@@ -35,15 +35,26 @@ const About = () => {
 
                     </div>
 
-                    <div className=" listFeatures groceryFeatures">
-                        <h3>Grocery List</h3>
+                    <div className="listFeatures groceryFeatures">
+                        <h3>Grocery List🛒</h3>
                         <ul>
                             <li>Got it? Switch items over to your fridge stock📦</li>
                             <li>If you don't need it, delete it 🚫</li>
                         </ul>
+                    </div>
 
+                    <div className="updateContainer">
+                        <h3>Updates & Patches 🔨</h3>
+                        <article className="listFeatures">
+                            <h4>05/01/2023 - Age of Authentication? 😲</h4>
+                            <ul>
+                                <li>Sign up to keep track of your foods... discreetly 🐱‍👤</li>
+                                <li>Demo mode by default: No time to sign up/in? add items publically!</li>
+                            </ul>
+                        </article>
                     </div>
                 </div>
+
 
 
             </article>

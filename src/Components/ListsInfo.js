@@ -1,10 +1,11 @@
 // FIREBASE INTEGRATION
 import { push } from 'firebase/database';
-
+import { onAuthStateChanged, signOut } from 'firebase/auth';
+import { firebaseAuth } from './Firebase';
 
 // HOOKS
 import axios from 'axios';
-import { Link, Routes, Route, useLocation } from 'react-router-dom';
+import { Link, Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from "react";
 
 // COMPONENTS
@@ -26,6 +27,10 @@ const ListsInfo = () => {
     // TAB ACTIVE CLASS STATE
     const [tabActive, setTabActive] = useState('')
 
+    // router 
+    const navigate = useNavigate();
+
+    // USER DB PATH INFO
 
     // return true/false if current suggestion's name DOES NOT match user input
     const searchEval = (suggestion) => {
@@ -97,8 +102,6 @@ const ListsInfo = () => {
         })
     }, [userSearch])
 
-
-
     // TAB ACTIVE HANDLER: setsState to tab title (string)
 
     const handleTabActive = (event) => {
@@ -117,6 +120,29 @@ const ListsInfo = () => {
             setTabActive('about')
         }
     }, [currentPath])
+
+    const [userPath, setUserPath] = useState('')
+
+    useEffect(() => {
+        onAuthStateChanged(firebaseAuth, (user) => {
+            if (user) {
+                const userId = user.uid
+                setUserPath(userId)
+            } else {
+                setUserPath('demo')
+            }
+
+            console.log(userPath)
+        })
+    }, [userPath])
+
+    const handleSignOut = () => {
+        signOut(firebaseAuth)
+            .then(() => {
+                navigate('/')
+                console.log('sign out successful')
+            })
+    }
 
     return (
         <>
@@ -162,14 +188,30 @@ const ListsInfo = () => {
                                 </Link>
                             </li>
 
-                            <li>
-                                <Link
-                                    to='/signIn'
-                                    onClick={handleTabActive}
-                                    className={tabActive === 'signIn' ? 'tabItem active' : 'tabItem'}>
-                                    Sign In
-                                </Link>
-                            </li>
+                            {userPath !== 'demo' ? null :
+                                <li>
+                                    <Link
+                                        to='/signIn'
+                                        onClick={handleTabActive}
+                                        className={tabActive === 'signIn' ? 'tabItem active' : 'tabItem'}>
+                                        Sign In
+                                    </Link>
+                                </li>
+                            }
+
+                            {/* SIGN OUT */}
+
+                            {userPath !== 'demo' ?
+                                <li>
+                                    <button
+                                        onClick={handleSignOut}
+                                        className='tabItem signOutTab'>
+                                        Sign Out
+                                    </button>
+                                </li>
+                                : null
+                            }
+
                         </ul>
                     </nav>
 
@@ -186,7 +228,9 @@ const ListsInfo = () => {
                             path='/signIn'
                             element={
                                 <div className='tabDisplay'>
-                                    <SignIn />
+                                    <SignIn
+                                        setUserPath={setUserPath}
+                                    />
                                 </div>
                             }
                         />
@@ -203,6 +247,7 @@ const ListsInfo = () => {
                                     handleChange={handleChange}
                                     handleSuggest={handleSuggest}
                                     setSearchError={setSearchError}
+                                    userPath={userPath}
                                 />} />
 
                         {/* GROCERY PATH */}
@@ -217,6 +262,7 @@ const ListsInfo = () => {
                                     handleChange={handleChange}
                                     handleSuggest={handleSuggest}
                                     setSearchError={setSearchError}
+                                    userPath={userPath}
                                 />} />
                         {/* END OF ROUTING LOGIC */}
                     </Routes>
