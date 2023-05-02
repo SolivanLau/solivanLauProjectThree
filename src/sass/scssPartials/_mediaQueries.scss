@@ -6,3 +6,13 @@
         }
     }
 }
+
+@media(max-width:360px) {
+    .displayTabs {
+        gap: 2px;
+    }
+
+    .tabItem {
+        font-size: .85rem;
+    }
+}

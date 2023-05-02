@@ -48,8 +48,9 @@ const About = () => {
                         <article className="listFeatures">
                             <h4>05/01/2023 - Age of Authentication? 😲</h4>
                             <ul>
-                                <li>Sign up to keep track of your foods... discreetly 🐱‍👤</li>
-                                <li>Demo mode by default: No time to sign up/in? add items publically!</li>
+                                <li>Log in to keep track of your foods... discreetly 🐱‍👤</li>
+                                <li>Sign up with email and password</li>
+                                <li><strong>Demo mode by default:</strong> No time to sign up? Try app features publically!</li>
                             </ul>
                         </article>
                     </div>

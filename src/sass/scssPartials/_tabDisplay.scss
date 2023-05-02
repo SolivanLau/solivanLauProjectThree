@@ -157,6 +157,13 @@
 
         .seePassBtn {
             width: 30px;
+            height: 30px;
+            padding: 2px;
+
+            svg {
+                height: 100%;
+                width: 100%;
+            }
         }
     }
 }

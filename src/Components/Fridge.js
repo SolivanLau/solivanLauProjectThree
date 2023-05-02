@@ -56,7 +56,7 @@ const Fridge = ({ userSearch, searchError, autoCompleteArr, pushFoodtoDB, handle
 
             setFridgeArr(localFridgeArr)
         })
-    }, [dbFridgeRef])
+    }, [])
 
 
 

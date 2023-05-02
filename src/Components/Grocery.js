@@ -15,6 +15,7 @@ const database = getDatabase(firebaseDB)
 const Grocery = ({ userSearch, searchError, autoCompleteArr, pushFoodtoDB, handleChange, handleSuggest, setSearchError, userPath }) => {
 
     const dbGroceryRef = ref(database, `users/${userPath}/groceryList/`)
+
     const groceryMode = {
         title: 'Grocery List',
         styleClass: 'grocery',
@@ -28,7 +29,6 @@ const Grocery = ({ userSearch, searchError, autoCompleteArr, pushFoodtoDB, handl
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log('Grocery form is submitted')
         pushFoodtoDB(dbGroceryRef)
     }
 
@@ -52,7 +52,7 @@ const Grocery = ({ userSearch, searchError, autoCompleteArr, pushFoodtoDB, handl
 
             setGroceryArr(localGroceryArr)
         })
-    }, [dbGroceryRef])
+    }, [])
 
     return (
         <section className='listDisplay grocery'>

@@ -131,16 +131,13 @@ const ListsInfo = () => {
             } else {
                 setUserPath('demo')
             }
-
-            console.log(userPath)
         })
-    }, [userPath])
+    }, [])
 
     const handleSignOut = () => {
         signOut(firebaseAuth)
             .then(() => {
                 navigate('/')
-                console.log('sign out successful')
             })
     }
 
@@ -191,10 +188,10 @@ const ListsInfo = () => {
                             {userPath !== 'demo' ? null :
                                 <li>
                                     <Link
-                                        to='/signIn'
+                                        to='/logIn'
                                         onClick={handleTabActive}
-                                        className={tabActive === 'signIn' ? 'tabItem active' : 'tabItem'}>
-                                        Sign In
+                                        className={tabActive === 'logIn' ? 'tabItem active' : 'tabItem'}>
+                                        Login
                                     </Link>
                                 </li>
                             }
@@ -225,7 +222,7 @@ const ListsInfo = () => {
 
                         {/* SIGN IN PATH */}
                         <Route
-                            path='/signIn'
+                            path='/logIn'
                             element={
                                 <div className='tabDisplay'>
                                     <SignIn

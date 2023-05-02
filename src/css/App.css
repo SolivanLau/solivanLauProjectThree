@@ -453,6 +453,7 @@ nav {
   padding: 5px 10px;
   background-color: #999999;
   color: #191919;
+  height: 100%;
   transition: 0.2s ease;
 }
 .tabItem:hover {
@@ -659,6 +660,12 @@ nav {
 }
 .authForm .passwordContainer .seePassBtn {
   width: 30px;
+  height: 30px;
+  padding: 2px;
+}
+.authForm .passwordContainer .seePassBtn svg {
+  height: 100%;
+  width: 100%;
 }
 
 .authBtnsContainer,
@@ -758,5 +765,13 @@ nav {
 @media (max-width: 500px) {
   .listForm label {
     display: none;
+  }
+}
+@media (max-width: 360px) {
+  .displayTabs {
+    gap: 2px;
+  }
+  .tabItem {
+    font-size: 0.85rem;
   }
 }
