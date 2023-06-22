@@ -24,7 +24,7 @@ const SignIn = () => {
   const [passVisible, setPassVisible] = useState(false);
 
   // error state
-  const [authError, setAuthError] = useState('made an oopsie');
+  const [authError, setAuthError] = useState('');
 
   // FIREBASE
   // database details and reference
