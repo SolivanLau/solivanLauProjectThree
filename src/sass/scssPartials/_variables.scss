@@ -1,61 +1,62 @@
 // base colors
 $black: #191919;
 $white: #efefef;
-$red: #F4705E;
-$green: #C5F48B;
+$red: #f4705e;
+$green: #c5f48b;
 $lightBlue: #a3c3f2;
-$blue: #79A3E0;
+$blue: #79a3e0;
 $grey: #999999;
-$yellow: #F8EC85;
+$yellow: #f8ec85;
 // hover
 $hoverGreen: #a2c971;
 $hoverGrey: #868585;
 
+// modal
+$modalOverlay: #4a4a4a9d;
 // Animations
 
 @keyframes inputError {
-    from {
-        opacity: 0;
-        top: -50px;
-    }
+  from {
+    opacity: 0;
+    top: -50px;
+  }
 
-    to {
-        opacity: 1;
-        top: -64px;
-    }
+  to {
+    opacity: 1;
+    top: -64px;
+  }
 }
 
 @keyframes expError {
-    from {
-        opacity: 0;
-        top: -50px;
-    }
+  from {
+    opacity: 0;
+    top: -50px;
+  }
 
-    to {
-        opacity: 1;
-        top: -64px;
-    }
+  to {
+    opacity: 1;
+    top: -64px;
+  }
 }
 
 @keyframes attention {
-    0% {
-        opacity: 0;
-        scale: .9;
-    }
+  0% {
+    opacity: 0;
+    scale: 0.9;
+  }
 
-    40% {
-        scale: 1.13;
+  40% {
+    scale: 1.13;
+  }
 
-    }
-
-    100% {
-        opacity: 1;
-        scale: 1;
-    }
+  100% {
+    opacity: 1;
+    scale: 1;
+  }
 }
 
 @keyframes foodItemAppear {
-    100% {
-        opacity: 100%;
-    }
+  100% {
+    opacity: 100%;
+  }
 }

@@ -1,203 +1,266 @@
 @use './variables' as *;
 
-
 .listDisplay,
 .tabDisplay {
-    max-width: 700px;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  max-width: 700px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .foodList {
-    width: 100%;
-    height: 100%;
-    overflow-y: scroll;
-    color: $black;
-    margin: 15px;
-    padding: 25px;
-    border-radius: 10px;
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+  color: $black;
+  margin: 15px;
+  padding: 25px;
+  border-radius: 10px;
 
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 20px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
 
-    position: relative;
-    transition: 03s ease;
+  position: relative;
+  transition: 03s ease;
 
-    &.fridge {
-        background-color: $white;
+  &.fridge {
+    background-color: $white;
+  }
+
+  &.grocery {
+    background-color: $yellow;
+
+    // paper line effect
+    &::before {
+      content: '';
+      width: 2px;
+      height: 100%;
+      position: absolute;
+      top: 0px;
+      left: 100px;
+      background-color: $red;
+      opacity: 0.5;
+      z-index: 0;
     }
 
-    &.grocery {
-        background-color: $yellow;
-
-
-        // paper line effect
-        &::before {
-            content: '';
-            width: 2px;
-            height: 100%;
-            position: absolute;
-            top: 0px;
-            left: 100px;
-            background-color: $red;
-            opacity: .5;
-            z-index: 0;
-        }
-
-        &::after {
-            content: '';
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            top: 0px;
-            left: 0px;
-            background-image: repeating-linear-gradient(transparent 0px, transparent 24px, rgb(0, 128, 128) 25px);
-            z-index: 0;
-        }
+    &::after {
+      content: '';
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      background-image: repeating-linear-gradient(
+        transparent 0px,
+        transparent 24px,
+        rgb(0, 128, 128) 25px
+      );
+      z-index: 0;
     }
+  }
 }
-
 
 // ABOUT SECTION
 
 // ABOUT ARTICLE
 .aboutApp {
-    // container styling
-    background-color: $white;
+  // container styling
+  background-color: $white;
+  width: 100%;
+  height: 100%;
+  border-radius: 0 10px 10px 10px;
+
+  padding: 15px 40px;
+  margin: 0 0 30px 0;
+  color: $black;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+
+  h2 {
     width: 100%;
-    height: 100%;
-    border-radius: 0 10px 10px 10px;
+    text-align: center;
+  }
 
-    padding: 15px 40px;
-    margin: 0 0 30px 0;
-    color: $black;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-
-    h2 {
-        width: 100%;
-        text-align: center;
-    }
-
-    overflow-y: scroll;
+  overflow-y: scroll;
 }
 
 .instructions {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-    p {
-        text-align: center;
-    }
+  p {
+    text-align: center;
+  }
 }
 
 .listFeaturesContainer {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .listFeatures {
-    h3 {
-        margin: 0 0 15px;
-    }
+  h3 {
+    margin: 0 0 15px;
+  }
 
-    ul {
-        list-style-type: disc;
-    }
+  ul {
+    list-style-type: disc;
+  }
 
-    li {
-        margin: 10px;
-    }
+  li {
+    margin: 1.2rem;
+  }
 }
 
 .updateContainer {
-    h3 {
-        margin: 0 0 15px;
-    }
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  h3 {
+    margin: 0 0 15px;
+    font-size: 1.5rem;
+  }
 }
 
 // auth tab
 .tabDisplay .authForm {
-    background-color: $white;
-    color: $black;
-    width: 100%;
-    height: 100%;
-    border-radius: 0 0 10px 10px;
-
+  background-color: $white;
+  color: $black;
+  width: 100%;
+  height: 100%;
+  border-radius: 0 0 10px 10px;
 }
 
 .authForm {
-    .wrapper {
-        display: flex;
-        justify-content: center;
-        gap: 15px;
+  position: relative;
+  .wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+  }
+
+  .inputContainer {
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+  }
+
+  .passwordContainer {
+    display: flex;
+    width: 250px;
+
+    .seePassBtn {
+      width: 30px;
+      height: 30px;
+      padding: 2px;
+
+      svg {
+        height: 100%;
+        width: 100%;
+      }
     }
-
-    .inputContainer {
-        display: flex;
-        flex-direction: column;
-        width: 250px;
-    }
-
-    .passwordContainer {
-        display: flex;
-        width: 250px;
-
-
-        .seePassBtn {
-            width: 30px;
-            height: 30px;
-            padding: 2px;
-
-            svg {
-                height: 100%;
-                width: 100%;
-            }
-        }
-    }
+  }
 }
 
 .authBtnsContainer,
 .altModeContainer,
 .demoContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .authBtnsContainer {
-    gap: 15px;
+  gap: 15px;
 }
-
 
 .altModeContainer,
 .demoContainer {
-    gap: 10px;
+  gap: 10px;
 }
-
-
 
 .signInBtns {
-    padding: 5px 15px;
-    border-radius: 10px;
-    border: 3px solid $grey;
-    transition: 0.2s ease;
+  padding: 5px 15px;
+  border-radius: 10px;
+  border: 3px solid $grey;
+  transition: 0.2s ease;
 }
 
-
 .submitBtn {
-    border-color: $hoverGreen;
+  border-color: $hoverGreen;
 }
 
 // auth modal
+.authModalContainer {
+  // overlay
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  // center
+  display: grid;
+  place-items: center;
+
+  background-color: $modalOverlay;
+
+  opacity: 0;
+
+  animation: foodItemAppear 0.4s forwards;
+  .modal {
+    width: 80%;
+    max-width: 1000px;
+    background-color: $white;
+    border-radius: 10px;
+
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.status {
+  display: grid;
+  place-items: center;
+  padding: 0.5rem 0;
+  border-radius: 10px 10px 0 0;
+
+  background-color: $red;
+  fill: $white;
+
+  svg {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.authError {
+  padding: 0.7rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  h3,
+  p {
+    text-align: center;
+  }
+
+  p {
+    margin-top: 0.5rem;
+    width: 60%;
+  }
+
+  button {
+    margin-top: 1rem;
+  }
+}
