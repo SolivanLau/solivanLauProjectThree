@@ -9,13 +9,13 @@ const About = () => {
     'Saturday',
   ];
   const weekday = new Date().getDay();
-
   const todayWeekday = daysOfWeek[weekday];
+
   return (
     <section className="tabDisplay">
       <article className="aboutApp">
         <h2>
-          A {`${todayWeekday}`} Night And ...{' '}
+          A {`${todayWeekday}`} Night And ...
           <span className="emphasis">Empty</span> Fridge
         </h2>
 
@@ -38,7 +38,7 @@ const About = () => {
             <h3>Fridge List🧊</h3>
             <ul>
               <li>
-                Track when your food has{' '}
+                Track when your food has
                 <span className="expiredText">expired</span> - goodbye stank!🤢
               </li>
               <li>
@@ -58,17 +58,6 @@ const About = () => {
           <div className="updateContainer">
             <h3>Updates & Patches 🔨</h3>
             <article className="listFeatures">
-              <h4>05/01/2023 - Age of Authentication? 😲</h4>
-              <ul>
-                <li>Log in to keep track of your foods... discreetly 🐱‍👤</li>
-                <li>Sign up with email and password</li>
-                <li>
-                  <strong>Demo mode by default:</strong> No time to sign up? Try
-                  app features publically!
-                </li>
-              </ul>
-            </article>
-            <article className="listFeatures">
               <h4>06/22/2023 - Short & Sweet 🍯</h4>
               <ul>
                 <li>
@@ -78,6 +67,17 @@ const About = () => {
                 <li>
                   <strong>Authentication:</strong> moves straight into log in
                   display after sign up! Adding authentication errors for user!
+                </li>
+              </ul>
+            </article>
+            <article className="listFeatures">
+              <h4>05/01/2023 - Age of Authentication? 😲</h4>
+              <ul>
+                <li>Log in to keep track of your foods... discreetly 🐱‍👤</li>
+                <li>Sign up with email and password</li>
+                <li>
+                  <strong>Demo mode by default:</strong> No time to sign up? Try
+                  app features publicly!
                 </li>
               </ul>
             </article>
