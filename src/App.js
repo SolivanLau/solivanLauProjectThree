@@ -2,10 +2,9 @@ import './css/App.css';
 
 // COMPONENT IMPORTS
 import ListsInfo from './Components/ListsInfo';
+import Footer from './Components/Footer';
 
 function App() {
-  const currentDate = new Date();
-
   return (
     <div className="appContainer">
       {/* HEADER */}
@@ -19,20 +18,9 @@ function App() {
       <ListsInfo />
 
       {/* FOOTER */}
-      <footer>
-        <div className="wrapper">
-          <p>
-            Made by
-            <a href="https://www.solivanlau.com" target="_blank" rel="noopener noreferrer" className="connectLink"> Solivan Lau </a>at
-            <a href="https://www.junocollege.com/" target="_blank" rel="noopener noreferrer" className="connectLink"> JunoCollege </a>
-            {currentDate.getFullYear()}
-          </p>
-        </div>
-      </footer >
-    </div >
-
-
-  )
+      <Footer />
+    </div>
+  );
 }
 
 export default App;

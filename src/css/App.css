@@ -667,15 +667,6 @@ nav {
   display: flex;
   width: 250px;
 }
-.authForm .passwordContainer .seePassBtn {
-  width: 30px;
-  height: 30px;
-  padding: 2px;
-}
-.authForm .passwordContainer .seePassBtn svg {
-  height: 100%;
-  width: 100%;
-}
 
 .authBtnsContainer,
 .altModeContainer,
@@ -699,6 +690,17 @@ nav {
   border-radius: 10px;
   border: 3px solid #999999;
   transition: 0.2s ease;
+}
+
+.seePassBtn {
+  padding: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+}
+.seePassBtn svg {
+  width: 30px;
 }
 
 .submitBtn {
@@ -731,12 +733,19 @@ nav {
   place-items: center;
   padding: 0.5rem 0;
   border-radius: 10px 10px 0 0;
-  background-color: #f4705e;
   fill: #efefef;
 }
 .status svg {
   width: 40px;
   height: 40px;
+}
+
+.statusError {
+  background-color: #f4705e;
+}
+
+.statusSuccess {
+  background-color: #a2c971;
 }
 
 .authError {

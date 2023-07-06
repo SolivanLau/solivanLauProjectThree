@@ -152,7 +152,7 @@ const ListsInfo = () => {
           {/* NAV */}
           <nav>
             <ul className="displayTabs">
-              {/* ABOUT */}
+              {/* ABOUT TAB */}
               <li>
                 <Link
                   to="/"
@@ -167,7 +167,7 @@ const ListsInfo = () => {
                 </Link>
               </li>
 
-              {/* FRIDGE */}
+              {/* FRIDGE TAB */}
               <li>
                 <Link
                   to="/fridge"
@@ -180,7 +180,7 @@ const ListsInfo = () => {
                 </Link>
               </li>
 
-              {/* GROCERY */}
+              {/* GROCERY TAB */}
               <li>
                 <Link
                   to="/grocery"
@@ -192,7 +192,7 @@ const ListsInfo = () => {
                   Grocery
                 </Link>
               </li>
-
+              {/* LOGIN TAB */}
               {userPath !== 'demo' ? null : (
                 <li>
                   <Link
@@ -207,7 +207,7 @@ const ListsInfo = () => {
                 </li>
               )}
 
-              {/* SIGN OUT */}
+              {/* SIGN OUT TAB*/}
 
               {userPath !== 'demo' ? (
                 <li>

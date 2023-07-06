@@ -1,14 +1,18 @@
+// ******** HOOKS ********
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+// ******** FIREBASE INTEGRATION ********
 import { firebaseDB, firebaseAuth } from './Firebase';
 import { set, getDatabase, ref, get } from 'firebase/database';
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from 'firebase/auth';
-// Icon Assets
-import { Info, PassInvisIcon, PassVisIcon } from '../assets/icons';
+// ******** COMPONENTS AND ASSETS ********
+import AuthErrModal from './AuthErrModal';
+import { PassInvisIcon, PassVisIcon } from '../assets/icons';
+import AuthSuccessModal from './AuthSuccessModal';
 const SignIn = () => {
   // ******** STATES AND VARIABLES********
 
@@ -23,8 +27,11 @@ const SignIn = () => {
   // password input visiblity
   const [passVisible, setPassVisible] = useState(false);
 
-  // error state
+  // error state - triggers auth err modal
   const [authError, setAuthError] = useState('');
+
+  // success state - triggers auth success modal on SIGN UP ONLY
+  const [authSuccess, setAuthSuccess] = useState(false);
 
   // FIREBASE
   // database details and reference
@@ -43,15 +50,15 @@ const SignIn = () => {
 
   // validate, then create account using email and pass. set up user db
   const signUp = (auth) => {
-    userName.length === 0 || password.length === 0
-      ? setAuthError('Please make sure your email or password is filled in!')
+    email.length === 0 || password.length === 0
+      ? setAuthError('Please make sure your email and password is filled in!')
       : createUserWithEmailAndPassword(auth, email, password)
           .then((userCred) => {
             //set up firebase db w a new path
             const newUserUid = userCred.user.uid;
             // create new user space in db
             set(ref(database, 'users/' + newUserUid), { userName: userName });
-            setSignUpMode(false);
+            setAuthSuccess(true);
           })
           .catch((error) => {
             const errorCode = error.code;
@@ -64,8 +71,8 @@ const SignIn = () => {
 
   // validate, then create account using email and pass. set up user db IF not found
   const login = (auth) => {
-    userName.length === 0 || password.length === 0
-      ? setAuthError('Please make sure your email or password is filled in!')
+    email.length === 0 || password.length === 0
+      ? setAuthError('Please make sure your email and password is filled in!')
       : signInWithEmailAndPassword(auth, email, password)
           .then((userCred) => {
             const userUid = userCred.user.uid;
@@ -81,10 +88,7 @@ const SignIn = () => {
           })
           .catch((error) => {
             const errorCode = error.code;
-            const errorMessage = error.message;
-            setAuthError(
-              `Having trouble loggin in: ${errorCode} ${errorMessage}`
-            );
+            setAuthError(`Having trouble loggin in: ${errorCode}`);
           });
   };
 
@@ -98,6 +102,10 @@ const SignIn = () => {
 
   const handleCloseModal = () => {
     setAuthError('');
+  };
+
+  const handleSignupSuccess = () => {
+    login(firebaseAuth);
   };
 
   return (
@@ -148,14 +156,13 @@ const SignIn = () => {
                 controlFormInput(event, setPassword);
               }}
             />
-
             {/* PASSWORD VISIBLE BTN */}
             <button
               type="button"
               onClick={() => {
                 setPassVisible(!passVisible);
               }}
-              className="seePassBtn signInBtns"
+              className="signInBtns seePassBtn"
             >
               {passVisible ? (
                 <span className="sr-only">Password is visible to users</span>
@@ -168,12 +175,15 @@ const SignIn = () => {
           </div>
         </div>
 
+        {/* FORM SUBMIT AND SETTINGS */}
+
         <div className="authBtnsContainer">
           {/* FORM SUBMIT BTN */}
           <button type="submit" className="signInBtns submitBtn">
             {!signUpMode ? `Log In` : `Register`}
           </button>
 
+          {/* SWITCH AUTH MODE BUTTON */}
           <div className="altModeContainer">
             <p>
               {!signUpMode ? `Need an account?` : `Already have an account?`}
@@ -190,6 +200,7 @@ const SignIn = () => {
             </button>
           </div>
 
+          {/* DEMO MODE BTN */}
           <div className="demoContainer">
             <p>No time⌚? Try the public demo!</p>
 
@@ -207,26 +218,16 @@ const SignIn = () => {
       </div>
 
       {authError && (
-        <aside className="authModalContainer">
-          <div className="modal">
-            <div className="status">
-              <Info />
-            </div>
-            <div className="authError">
-              <h3>Oops...🚒</h3>
-              <p>
-                <strong>Error:</strong> {`${authError}`}
-              </p>
-              <button
-                type="button"
-                className="signInBtns"
-                onClick={handleCloseModal}
-              >
-                Try Again
-              </button>
-            </div>
-          </div>
-        </aside>
+        <AuthErrModal
+          authError={authError}
+          handleCloseModal={handleCloseModal}
+        />
+      )}
+      {authSuccess && (
+        <AuthSuccessModal
+          email={email}
+          handleSignupSuccess={handleSignupSuccess}
+        />
       )}
     </form>
   );

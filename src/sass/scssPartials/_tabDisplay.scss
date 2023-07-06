@@ -159,17 +159,6 @@
   .passwordContainer {
     display: flex;
     width: 250px;
-
-    .seePassBtn {
-      width: 30px;
-      height: 30px;
-      padding: 2px;
-
-      svg {
-        height: 100%;
-        width: 100%;
-      }
-    }
   }
 }
 
@@ -196,7 +185,16 @@
   border: 3px solid $grey;
   transition: 0.2s ease;
 }
-
+.seePassBtn {
+  padding: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  svg {
+    width: 30px;
+  }
+}
 .submitBtn {
   border-color: $hoverGreen;
 }
@@ -236,7 +234,6 @@
   padding: 0.5rem 0;
   border-radius: 10px 10px 0 0;
 
-  background-color: $red;
   fill: $white;
 
   svg {
@@ -245,6 +242,12 @@
   }
 }
 
+.statusError {
+  background-color: $red;
+}
+.statusSuccess {
+  background-color: $hoverGreen;
+}
 .authError {
   padding: 0.7rem;
   display: flex;

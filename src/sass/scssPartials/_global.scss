@@ -1,22 +1,23 @@
 @use './variables' as *;
 
-
 // setting fontsize 125%
 html {
-    font-size: 125%;
-    scroll-behavior: smooth;
-    color: $white;
+  font-size: 125%;
+  scroll-behavior: smooth;
+  color: $white;
 }
 
 body {
-    background-color: $black;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  background-color: $black;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 :focus-visible {
-    outline: 2px solid $green;
+  outline: 2px solid $green;
 }
 
 // strip styles
@@ -28,165 +29,165 @@ h5,
 h6,
 p,
 a {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 a {
-    text-decoration: none;
-    color: $white;
+  text-decoration: none;
+  color: $white;
 }
 
 .connectLink {
-    color: $green;
+  color: $green;
 
-    transition: 0.3s ease;
+  transition: 0.3s ease;
 
-    &:hover {
-        color: $hoverGreen;
-    }
+  &:hover {
+    color: $hoverGreen;
+  }
 }
 
 ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
 
 ol {
-    li {
-        margin: 10px 0;
-    }
+  li {
+    margin: 10px 0;
+  }
 }
 
 img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 button {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 
-    &:hover,
-    &:focus {
-        cursor: pointer;
-    }
+  &:hover,
+  &:focus {
+    cursor: pointer;
+  }
 
-    svg {
-        fill: $black;
-    }
+  svg {
+    fill: $black;
+  }
 }
 
 .symbolBtn {
-    width: 40px;
-    height: 40px;
-    border: none;
-    border-radius: 10px;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 10px;
 
-    transition: 0.2s ease;
+  transition: 0.2s ease;
 
-    &:hover,
-    &:focus {
-        scale: 1.15;
-    }
+  &:hover,
+  &:focus {
+    scale: 1.15;
+  }
 }
 
 .addBtn {
-    background-color: $green;
+  background-color: $green;
 
-    &:hover,
-    &:focus {
-        background-color: $hoverGreen;
-    }
+  &:hover,
+  &:focus {
+    background-color: $hoverGreen;
+  }
 }
 
 .removeBtn {
-    background-color: $red;
+  background-color: $red;
 }
 
 //error msg popup!
 .errorMsg {
-    //postioning
-    position: absolute;
-    font-size: .8rem;
-    width: 100%;
-    background-color: $grey;
-    border-radius: 10px;
-    padding: 10px;
-    color: $black;
-    text-align: center;
+  // positioning
+  position: absolute;
+  font-size: 0.8rem;
+  width: 100%;
+  background-color: $grey;
+  border-radius: 10px;
+  padding: 10px;
+  color: $black;
+  text-align: center;
 }
 
 // wrapper
 
 .wrapper {
-    max-width: 1440px;
-    width: 85%;
-    margin: 0 auto;
+  max-width: 1440px;
+  width: 85%;
+  margin: 0 auto;
 }
 
 // hide content class
 .hidden {
-    display: none;
+  display: none;
 }
 
 .attention {
-    font-weight: bold;
-    color: $green;
+  font-weight: bold;
+  color: $green;
 }
 
 .emphasis {
-    font-weight: bold;
-    color: $red;
+  font-weight: bold;
+  color: $red;
 }
 
 .expiredText {
-    font-weight: bold;
-    color: $green;
-    background-color: grey;
-    border-radius: 5px;
-    padding: 0 5px;
+  font-weight: bold;
+  color: $green;
+  background-color: grey;
+  border-radius: 5px;
+  padding: 0 5px;
 }
 
 // general section styles
 .appContainer {
-    height: 99.8vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    background-image: url(../assets/fridgeBg.svg);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
+  height: 99.8vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-image: url(../assets/fridgeBg.svg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 header,
 footer {
-    text-align: center;
+  text-align: center;
 }
 
 .dynamicBG {
-    width: 100%;
-    height: 100%;
-    background-color: $blue;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -10;
+  width: 100%;
+  height: 100%;
+  background-color: $blue;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -10;
 }
 
 // align all items to center
 
 main {
-    height: 80%;
+  height: 80%;
 
-    .wrapper {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        height: 100%;
-    }
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+  }
 }
